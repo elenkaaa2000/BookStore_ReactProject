@@ -1,19 +1,20 @@
+import { Link } from 'react-router'
 export default function Footer(){
     return(
         <footer className="section site-footer">
         <div className="flex">
             <section className="site-logo">
                 <div className="logo">
-                    <a href="#">BookStore</a>
+                    <Link to="/">BookStore</Link>
                 </div>
             </section>
 
             <div className="footer-nav">
                 <ul>
-                    <li><a href="#">Начална страница</a></li>
-                    <li><a href="#">Каталог</a></li>
-                    <li><a href="#">Блог</a></li>
-                    <li><a href="#">Контакти</a></li>
+                    <li><Link to="/">Начална страница</Link></li>
+                    <li><Link to="/catalog">Каталог</Link></li>
+                    <li><Link to="/blog">Блог</Link></li>
+                    <li><Link to="/contacts">Контакти</Link></li>
                 </ul>
             </div>
 
@@ -21,7 +22,6 @@ export default function Footer(){
                 <i className="fa-brands fa-facebook"></i>
                 <i className="fa-brands fa-instagram"></i>
                 <i className="fa-brands fa-twitter"></i>
-
             </div>
 
         </div>

@@ -1,3 +1,5 @@
+import BookCatalogItem from "../BookCatalogItem/BookCatalogItem";
+
 export default function Catalog(){
     return(
         <section className="section catalog">
@@ -15,60 +17,9 @@ export default function Catalog(){
                 </ul>
             </nav>
             <section className="books">
-                <div className="book-template">
-                    <div className="book-image">
-                        <img src="./onyx-storm-bg.jpg" alt=""/>
-                    </div>
-                    <div className="description">
-                        <h3>Буря от оникс</h3>
-                        <h5>Ребека Ярос</h5>
-                        <button>Детайли</button>
-                    </div>
-                </div>
-
-                <div className="book-template">
-                    <div className="book-image">
-                        <img src="./onyx-storm-bg.jpg" alt=""/>
-                    </div>
-                    <div className="description">
-                        <h3>Буря от оникс</h3>
-                        <h5>Ребека Ярос</h5>
-                        <button>Детайли</button>
-                    </div>
-                </div>
-
-                <div className="book-template">
-                    <div className="book-image">
-                        <img src="./onyx-storm-bg.jpg" alt=""/>
-                    </div>
-                    <div className="description">
-                        <h3>Буря от оникс</h3>
-                        <h5>Ребека Ярос</h5>
-                        <button>Детайли</button>
-                    </div>
-                </div>
-
-                <div className="book-template">
-                    <div className="book-image">
-                        <img src="./onyx-storm-bg.jpg" alt=""/>
-                    </div>
-                    <div className="description">
-                        <h3>Буря от оникс</h3>
-                        <h5>Ребека Ярос</h5>
-                        <button>Детайли</button>
-                    </div>
-                </div>
-
-                <div className="book-template">
-                    <div className="book-image">
-                        <img src="./onyx-storm-bg.jpg" alt=""/>
-                    </div>
-                    <div className="description">
-                        <h3>Буря от оникс</h3>
-                        <h5>Ребека Ярос</h5>
-                        <button>Детайли</button>
-                    </div>
-                </div>
+               <BookCatalogItem />
+               <BookCatalogItem />
+               <BookCatalogItem />
             </section>
 
         </section>

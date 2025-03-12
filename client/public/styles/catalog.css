@@ -7,7 +7,7 @@
     position: relative;
     flex-wrap: wrap;
 }
-
+/*
 .catalog .books .book-template {
     max-width: 200px;
     text-align: center;
@@ -52,7 +52,7 @@
 .catalog .books .book-template .description button:hover {
     background-color: rgb(230, 180, 100);
 }
-
+*/
 .catalog h1 {
     text-align: center;
     color: orange

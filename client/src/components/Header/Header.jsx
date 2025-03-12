@@ -1,10 +1,11 @@
+import { Link } from 'react-router'
 export default function Header(){
     return (
         <>
         <header className="section site-header">
         <div className="mini-nav">
             <div className="logo">
-                <a href="#">BookStore</a>
+                <Link to="/">BookStore</Link>
             </div>
             <div className="search-field">
                 <input type="text" name="search" id="search" placeholder="Search..."/>
@@ -12,10 +13,10 @@ export default function Header(){
             </div>
             <nav>
                 <ul>
-                    <li><a href="#">Влез</a></li>
-                    <li><a href="#">Регистрация</a></li>
-                    <li><a href="#">Излез</a></li>
-                    <li><a href="#">Профил</a></li>
+                    <li><Link to="/login">Влез</Link></li>
+                    <li><Link to="/register">Регистрация</Link></li>
+                    <li><Link to="/logout">Излез</Link></li>
+                    <li><Link to="/profile">Профил</Link></li>
                 </ul>
             </nav>
 
@@ -23,10 +24,10 @@ export default function Header(){
 
         <nav className="site-nav">
             <ul>
-                <li className="active"><a href="#">Начална страница</a></li>
-                <li><a href="#">Каталог</a></li>
-                <li><a href="#">Блог</a></li>
-                <li><a href="#">Контакти</a></li>
+                <li className="active"><Link to="/">Начална страница</Link></li>
+                <li><Link to="/catalog">Каталог</Link></li>
+                <li><Link to="/blog">Блог</Link></li>
+                <li><Link to="/contacts">Контакти</Link></li>
             </ul>
         </nav>
     </header>

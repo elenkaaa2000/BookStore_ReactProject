@@ -4,7 +4,7 @@ export default function BookDetails(){
             <section className="book-details-content">
                 <main className="main-details">
                     <div className="book-image">
-                        <img src="./onyx-storm-bg.jpg" alt=""/>
+                    <img src="https://www.ciela.com/media/catalog/product/cache/9a7ceae8a5abbd0253425b80f9ef99a5/o/n/onyx-storm-bg.jpg" alt="" />
                     </div>
                     <div className="book-description">
                         <h2>Буря от оникс</h2>

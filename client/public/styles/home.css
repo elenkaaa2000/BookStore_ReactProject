@@ -1,5 +1,5 @@
 .site-home .banner {
-    background-image: url("./background2.jpg");
+    background-image: url("../images/background2.jpg");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -29,49 +29,4 @@
     gap: 2em;
     position: relative;
     flex-wrap: wrap;
-}
-
-.site-home .featured-books .book-template {
-    max-width: 200px;
-    text-align: center;
-    border-radius: 0.5em;
-    box-shadow: 0 0 1em 0 rgb(0, 0, 0, 0.2);
-    transition: transform 0.3s ease-in-out;
-
-}
-
-.site-home .featured-books .book-template:hover {
-    transform: translateY(-0.5em);
-}
-
-.site-home .featured-books .book-template img {
-    max-width: 100%;
-    border-top-left-radius: 0.5em;
-    border-top-right-radius: 0.5em;
-}
-
-.site-home .featured-books .book-template .description h3,
-.site-home .featured-books .book-template .description h5 {
-    padding-bottom: 0.5rem;
-    font-weight: normal;
-    color: #555;
-}
-
-.site-home .featured-books .book-template .description h3 {
-    font-weight: bold;
-}
-
-.site-home .featured-books .book-template .description button {
-    margin-bottom: 1rem;
-    background-color: rgb(248, 209, 136);
-    color: #555555;
-    border: none;
-    padding: 0.2em 0.8em;
-    border-radius: 1em;
-    transition: background-color 0.3s ease-in-out;
-    cursor: pointer;
-}
-
-.site-home .featured-books .book-template .description button:hover {
-    background-color: rgb(230, 180, 100);
 }
