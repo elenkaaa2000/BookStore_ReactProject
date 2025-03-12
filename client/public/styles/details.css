@@ -1,0 +1,153 @@
+.book-details .book-details-content {
+    display: flex;
+    padding: 1em 8em;
+    gap: 4em
+}
+
+.book-details .main-details {
+    display: flex;
+    gap: 2em;
+}
+
+.book-details .main-details .book-image {
+    padding: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.book-details .main-details .book-image img {
+    display: block;
+    max-width: 300px;
+
+}
+
+.book-details .main-details .book-description .book-review {
+    margin-top: 2em;
+}
+
+.book-details .main-details .book-description h2 {
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.book-details .main-details .book-description p {
+    padding-bottom: 0.5rem;
+}
+
+.book-details .main-details .book-description p span {
+    font-weight: bold;
+}
+
+.book-details .book-details-content .aside-details table {
+    width: 100%;
+    margin-top: 2em;
+    border-collapse: collapse;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+
+}
+
+.book-details .book-details-content .aside-details table th,
+.book-details .book-details-content .aside-details table td {
+    padding: 0.5em 1em;
+    border: 1px solid #ddd;
+    text-align: left;
+    font-size: 12px;
+}
+
+.book-details .book-details-content .aside-details table th {
+    background-color: #333;
+    color: #fff;
+}
+
+.book-details hr {
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 2em;
+    border: 1px solid rgb(230, 180, 100);
+}
+
+.book-details .book-details-comments {
+    display: flex;
+    width: 70%;
+    margin: 0 auto;
+    flex-direction: column;
+    gap: 2em;
+    padding: 2em 8em;
+    justify-content: center;
+}
+
+.book-details .book-details-comments .all-comments h3 {
+    text-align: center;
+}
+
+.book-details .book-details-comments .all-comments {
+    display: flex;
+    flex-direction: column;
+    padding: 2em;
+    gap: 1em;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.book-details .book-details-comments .all-comments .comment {
+    padding: 2em;
+}
+
+.book-details .book-details-comments .all-comments h3,
+.book-details .book-details-comments .add-comment h3 {
+    padding-bottom: 1rem;
+    color: rgb(230, 180, 100);
+    ;
+}
+
+.book-details .book-details-comments .add-comment {
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 2em;
+
+}
+
+.book-details .book-details-comments .add-comment form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    justify-content: center;
+    margin-top: 2em;
+
+}
+
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+input[type='submit'] {
+    background: linear-gradient(rgb(230, 180, 100), rgb(212, 147, 43));
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3 ease-in;
+}
+
+input[type='submit']:hover {
+
+    background: linear-gradient(rgb(212, 147, 43), rgb(230, 180, 100));
+}

@@ -1,0 +1,104 @@
+@media (max-width:600px){
+    .site-header .mini-nav{
+        flex-direction: column;
+        gap:2em
+    }
+    .site-header .mini-nav nav ul,
+    .site-header .site-nav ul,
+    .catalog nav ul{
+       flex-direction: column;
+       gap:0.5em;
+       align-items: center;       
+    }   
+
+    .site-home .featured-books{
+        flex-wrap: wrap;
+    }
+    .site-header .site-nav ul{
+        padding: 0;
+    }
+
+    .book-details .book-details-content {
+        flex-direction: column;
+        padding: 2em;
+    }
+    .book-details .main-details{
+        flex-direction: column;
+    }
+    .book-details .main-details .book-image{
+        display: flex;      
+        max-width: 300px;
+    }
+    .book-details .main-details .book-image img{
+        width: 100%;
+    }
+
+    .book-details .main-details{
+        justify-content: center;
+        align-items: center;
+    }
+
+    .book-details .book-details-comments{
+        width: 100%;
+        padding: 2em;
+    }
+
+    .edit-book,
+    .create-book{
+        padding: 2em;
+        background: white;
+    }
+
+    .edit-book .create-form,
+    .create-book .create-form{
+        flex-direction: column;
+    }
+
+    .edit-book .create-form .field,
+    .edit-book .create-form .field-description,
+    .create-book .create-form .field,
+    .create-book .create-form .field-description{
+        width: 100%;
+    }
+
+    .register-page
+    {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+       
+    }
+
+    .login-page{
+        width: 100%;
+    }
+
+    .login-page .image img{
+        max-width: 300px;
+    }
+
+    .login-page .login-form-container{
+        padding-bottom: 2rem;
+    }
+    .login-page .login-form input[type='submit'] {
+        width: 100%;
+    }
+
+    .contacts-page .contact{
+        flex-direction: column;
+        max-width: 100%;
+        margin: 1em;
+    }
+    .contacts-page .contact .image {
+        margin: 0 auto;
+        margin-bottom: 1rem;
+    }
+    .contacts-page .contact .image img{
+        border-radius: 0;
+    }
+
+    footer .flex{
+        flex-direction: column;
+        gap:2em
+    }
+}

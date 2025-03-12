@@ -1,0 +1,86 @@
+
+.register-page {
+    display: flex;
+    width: 80%;
+    margin: 0 auto;
+    gap: 2em;
+    border: 1px solid #ccc;
+    display: flex;
+    transition: all 0.3s ease-in-out;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.register-page:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.register-page .login-form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2em;
+}
+
+.register-page .login-form-container h2 {
+    padding-bottom: 1.5rem;
+}
+
+.register-page .login-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+    justify-content: center;
+}
+
+.register-page .login-form .field {
+    width: 40%;
+}
+
+.register-page .login-form-container h2 {
+    color: rgb(230, 180, 100);
+
+}
+
+.register-page .login-form-container .login-form input[type='submit'] {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.login-form .field input {
+    transition: all 0.3s ease-in-out;
+    border: 2px solid #ccc;
+    padding: 8px;
+    border-radius: 5px;
+    outline: none;
+    width: 100%;
+    cursor: pointer;
+    resize: vertical;
+
+}
+
+.login-form .field input:focus {
+    border-color: rgb(230, 180, 100);
+    ;
+    /* Changes border color when focused */
+    box-shadow: 0 0 5px rgba(230, 180, 100, 0.5);
+}
+
+.login-form label {
+    font-style: italic;
+    color: #555
+}
+
+.register-page .image {
+    display: block;
+    max-width: 600px;
+}
+
+.register-page .image img {
+    width: 100%;
+    display: block;
+    height: 100%;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}

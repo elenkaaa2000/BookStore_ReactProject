@@ -1,0 +1,46 @@
+
+.contacts-page .contact {
+    max-width: 50%;
+    box-shadow: 0 0 1em 0 rgb(0, 0, 0, 0.2);
+    border-radius: 10px;
+    margin: 0 auto;
+    display: flex;
+    gap: 2em;
+    margin-bottom: 2rem;
+
+}
+
+.contacts-page .contact .contact-details {
+    flex-grow: 1;
+    padding: 2em 4em;
+}
+
+.contacts-page .contact .contact-details h3 {
+    text-align: center;
+    padding-bottom: 1.5rem;
+}
+
+.contacts-page .contact .contact-details .address {
+    display: flex;
+    flex-direction: column;
+    gap: 1em
+}
+
+.contacts-page .contact .contact-details .address p i{
+    margin-right: 1em;
+    color: orange;
+}
+.contacts-page .contact .contact-details .address p{
+    color: #555;
+}
+
+.contacts-page .contact .image {
+    max-width: 220px;
+}
+
+.contacts-page img {
+    width: 100%;
+    display: block;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
