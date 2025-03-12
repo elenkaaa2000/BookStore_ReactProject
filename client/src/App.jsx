@@ -7,6 +7,7 @@ import Catalog from './components/Catalog/Catalog'
 import Login from './components/Login/Login'
 import Register from './components/Register/Register'
 import BookDetails from './components/BookDetails/BookDetails'
+import BookCreate from './components/BookCreate/BookCreate'
 
 function App() {
 
@@ -19,9 +20,10 @@ function App() {
             <Route path='/' element={<Home />} />
             <Route path='/catalog' element={<Catalog/>}/>
             <Route path='/book/:id/details' element={<BookDetails/>} />
-         
-            <Route path='/catalog' element={<Login/>}/>
-            <Route path='/catalog' element={<Register/>}/>
+
+            <Route path='/book/create' element={<BookCreate/>}/>         
+            <Route path='/login' element={<Login/>}/>
+            <Route path='/register' element={<Register/>}/>
             
           </Routes>
         </section>

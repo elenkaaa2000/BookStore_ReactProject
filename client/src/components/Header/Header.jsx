@@ -26,6 +26,7 @@ export default function Header(){
             <ul>
                 <li className="active"><Link to="/">Начална страница</Link></li>
                 <li><Link to="/catalog">Каталог</Link></li>
+                <li><Link to="/book/create">Добави книга</Link></li>
                 <li><Link to="/blog">Блог</Link></li>
                 <li><Link to="/contacts">Контакти</Link></li>
             </ul>
