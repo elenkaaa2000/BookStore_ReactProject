@@ -3,12 +3,15 @@ import BookCatalogItem from "../BookCatalogItem/BookCatalogItem";
 import bookService from "../../services/bookService";
 
 export default function Home() {
-    const [books, setBooks] = useState([]);
+    const [books, setBooks] = useState([])
 
     useEffect(() => {
-        bookService.getLastFive()
-            .then(setBooks)
-    });
+        bookService.getAll()
+            .then(result => {
+                setBooks(result)
+            })
+    }, []);
+        
     return (
         <section className="section site-home">
             <section className="banner">
