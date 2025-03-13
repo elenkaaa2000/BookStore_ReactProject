@@ -1,7 +1,17 @@
+import { useEffect, useState } from "react";
 import BookCatalogItem from "../BookCatalogItem/BookCatalogItem";
+import bookService from "../../services/bookService";
 
-export default function Catalog(){
-    return(
+export default function Catalog() {
+    const [books, setBooks] = useState([]);
+    useEffect(() => {
+        bookService.getAll()
+            .then(result => {
+                setBooks(result)
+            })
+    }, []);
+
+    return (
         <section className="section catalog">
             <h1>Каталог</h1>
             <nav>
@@ -17,9 +27,10 @@ export default function Catalog(){
                 </ul>
             </nav>
             <section className="books">
-               <BookCatalogItem />
-               <BookCatalogItem />
-               <BookCatalogItem />
+                {books.map(book =>
+                    <BookCatalogItem
+                        key={book._id}
+                        {...book} />)}
             </section>
 
         </section>

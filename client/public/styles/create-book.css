@@ -39,7 +39,7 @@
 }
 
 .create-book .create-form .field-description {
-    width: 40%;
+    width: 20%;
 }
 
 .create-book .create-form input[type='submit'] {
@@ -48,6 +48,7 @@
 }
 
 .create-form .field input,
+.create-form .field select,
 .create-form .field-description textarea {
     transition: all 0.3s ease-in-out;
     border: 2px solid #ccc;
@@ -73,6 +74,8 @@
     color: #555
 }
 
-.field-description textarea {
+.field-description textarea,
+.create-form .field select
+ {
     height: 40px;
 }
