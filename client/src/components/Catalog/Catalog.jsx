@@ -10,7 +10,6 @@ export default function Catalog() {
                 setBooks(result)
             })
     }, []);
-
     return (
         <section className="section catalog">
             <h1>Каталог</h1>

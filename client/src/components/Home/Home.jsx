@@ -1,6 +1,14 @@
+import { useEffect, useState } from "react";
 import BookCatalogItem from "../BookCatalogItem/BookCatalogItem";
+import bookService from "../../services/bookService";
 
 export default function Home() {
+    const [books, setBooks] = useState([]);
+
+    useEffect(() => {
+        bookService.getLastFive()
+            .then(setBooks)
+    });
     return (
         <section className="section site-home">
             <section className="banner">
@@ -9,11 +17,7 @@ export default function Home() {
                     dicta in quo voluptate cupiditate ullam accusamus repellat.</h3>
             </section>
             <section className="featured-books">
-                <BookCatalogItem />
-
-                 <BookCatalogItem />  
-
-                  <BookCatalogItem />   
+                {books.map(book => <BookCatalogItem key={book._id} {...book} />)}
             </section>
         </section>
 

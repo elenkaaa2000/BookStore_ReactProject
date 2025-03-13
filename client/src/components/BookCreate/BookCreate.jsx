@@ -58,8 +58,8 @@ export default function BookCreate() {
                 </div>
 
                 <div className="field">
-                    <label htmlFor="cover-image">Корица</label>
-                    <input type="text" name="cover_image" id="cover-image" />
+                    <label htmlFor="imageUrl">Корица</label>
+                    <input type="text" name="imageUrl" id="imageUrl" />
                 </div>
 
                 <div className="field">

@@ -4,14 +4,14 @@ export default function BookCatalogItem({
     title,
     author,
     price,
-    cover_image
+    imageUrl
 
 }) {
-    console.log(title)
+    
     return (
         <div className="book-template">
             <div className="book-image">
-                <img src={cover_image} alt={title} />
+                <img src={imageUrl} alt={title} />
             </div>
             <div className="description">
                 <h3>{title}</h3>
