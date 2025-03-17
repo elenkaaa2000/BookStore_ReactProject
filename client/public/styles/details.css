@@ -151,3 +151,34 @@ input[type='submit']:hover {
 
     background: linear-gradient(rgb(212, 147, 43), rgb(230, 180, 100));
 }
+
+.action-buttons{
+   margin-top: 2rem;
+   display: flex;
+   gap:1em;
+}
+
+.action-buttons button {
+    margin-bottom: 1rem;
+    background-color: rgb(248, 209, 136);
+    color: #555555;
+    border: none;
+    padding: 0.2em 0.8em;
+    border-radius: 1em;
+    transition: background-color 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.action-buttons a{
+    text-decoration: none;
+    color:white
+}
+
+.action-buttons button:hover {
+    background-color: rgb(230, 180, 100);
+}
+
+
+
+
+

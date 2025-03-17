@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router"
+import { Link } from "react-router"
 import bookService from "../../services/bookService";
 
 export default function BookDetails() {
@@ -70,9 +71,16 @@ export default function BookDetails() {
                             </tr>
 
                         </tbody>
-
-
                     </table>
+                        {/*If owner*/}
+                    <div className="action-buttons">
+                        <button><Link to={`/book/${bookId}/edit`}>Редактирай</Link></button>
+                        <button><Link to={`/book/${bookId}/delete`}>Изтрий</Link></button>
+
+                        {/*If guest */}
+                        <button><Link to={`/book/${bookId}/buy`}>Купи</Link></button>
+                    </div>
+                    
                 </aside>
             </section>
 
