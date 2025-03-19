@@ -1,33 +1,19 @@
-import { useActionState } from "react";
-
-
 import { useNavigate } from 'react-router'
 import { useCreateBook } from "../../api/bookApi";
 
 export default function BookCreate() {
     const navigate = useNavigate();
-    const { create } = useCreateBook
+    const { create } = useCreateBook();
 
-    const createActionHandler = async (formData) => {
-        const bookData = Object.fromEntries(formData);
-        await create(bookData);
-        navigate('/catalog');
+    const createAction = async (formData) => {
+        const data = Object.fromEntries(formData);       
+
+        await create(data);
+
+        navigate('/');
     }
 
-    const [_, createAction, isPending] = useActionState(createActionHandler, {
-        title: '',
-        author: '',
-        publisher: '',
-        published_year: '',
-        isbn: '',
-        categoty: '',
-        imageUrl: '',
-        pages: '',
-        language: '',
-        translator: '',
-        price: '',
-        description: ''
-    })
+
 
     return (
         <section className="section create-book">

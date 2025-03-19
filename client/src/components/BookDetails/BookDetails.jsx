@@ -1,19 +1,27 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router"
+import { useNavigate, useParams } from "react-router"
 import { Link } from "react-router"
-import bookService from "../../services/bookService";
+import { useDeleteBook, useFetchBookDetails } from "../../api/bookApi";
+import { useContext } from "react";
+import { UserContext } from "../../context/UserContext";
+
 
 export default function BookDetails() {
     const { bookId } = useParams();
+    const { _id: userId } = useContext(UserContext);
+    const { book } = useFetchBookDetails(bookId);
+    const { deleteBook } = useDeleteBook();
+    const navigate = useNavigate()
 
-    const [book, setBook] = useState({})
-    useEffect(() => {
-        bookService.getOne(bookId)
-            .then(r => {
-                setBook(r)
-            })
-    }, [bookId])
+    const isOwner = userId === book._ownerId;
 
+    const deleteBookHandler = async () => {
+        const hasConfirm = confirm('Are you sure?')
+        if (!hasConfirm) {
+            return
+        }
+        await deleteBook(bookId)
+        navigate('/catalog')
+    }
     return (
         <section className="section book-details">
             <section className="book-details-content">
@@ -72,15 +80,22 @@ export default function BookDetails() {
 
                         </tbody>
                     </table>
-                        {/*If owner*/}
-                    <div className="action-buttons">
-                        <button><Link to={`/book/${bookId}/edit`}>Редактирай</Link></button>
-                        <button><Link to={`/book/${bookId}/delete`}>Изтрий</Link></button>
 
-                        {/*If guest */}
-                        <button><Link to={`/book/${bookId}/buy`}>Купи</Link></button>
-                    </div>
-                    
+                    {userId && (
+                        <div className="action-buttons">
+                            {isOwner ?
+                                (<>
+                                    <button><Link to={`/book/${bookId}/edit`}>Редактирай</Link></button>
+                                    <button onClick={deleteBookHandler}>Изтрий</button>
+                                </>)
+                                :
+                                (<button><Link to={`/book/${bookId}/buy`}>Купи</Link></button>)}
+
+                        </div>
+                    )}
+
+
+
                 </aside>
             </section>
 

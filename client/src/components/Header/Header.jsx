@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { Link } from 'react-router'
+import { Link, NavLink } from 'react-router'
 import { UserContext } from '../../context/UserContext'
 export default function Header() {
     const { username } = useContext(UserContext)
@@ -18,13 +18,13 @@ export default function Header() {
                         <ul>
                             {!username ? (
                                 <>
-                                    <li><Link to="/login">Влез</Link></li>
-                                    <li><Link to="/register">Регистрация</Link></li>
+                                    <li><NavLink to="/login" className={({ isActive }) => isActive ? "active" : ""}>Влез</NavLink></li>
+                                    <li><NavLink to="/register" className={({ isActive }) => isActive ? "active" : ""}>Регистрация</NavLink></li>
                                 </>)
                                 :
                                 (<>
-                                    <li><Link to="/logout">Излез</Link></li>
-                                    <li><Link to="/profile">Профил</Link></li>
+                                    <li><NavLink to="/logout" className={({ isActive }) => isActive ? "active" : ""}>Излез</NavLink></li>
+                                    <li><NavLink to="/profile" className={({ isActive }) => isActive ? "active" : ""}>Профил</NavLink></li>
                                 </>)}
                         </ul>
                     </nav>
@@ -33,12 +33,12 @@ export default function Header() {
 
                 <nav className="site-nav">
                     <ul>
-                        <li className="active"><Link to="/">Начална страница</Link></li>
-                        <li><Link to="/catalog">Каталог</Link></li>
-                        {username && (<li><Link to="/book/create">Добави книга</Link></li>)}
+                        <li><NavLink to="/" className={({ isActive }) => isActive ? "active" : ""}>Начална страница</NavLink></li>
+                        <li><NavLink to="/catalog" className={({ isActive }) => isActive ? "active" : ""}>Каталог</NavLink></li>
+                        {username && (<li><NavLink to="/book/create" className={({ isActive }) => isActive ? "active" : ""}>Добави книга</NavLink></li>)}
 
-                        <li><Link to="/blog">Блог</Link></li>
-                        <li><Link to="/contacts">Контакти</Link></li>
+                        <li><NavLink to="/blog" className={({ isActive }) => isActive ? "active" : ""}>Блог</NavLink></li>
+                        <li><NavLink to="/contacts" className={({ isActive }) => isActive ? "active" : ""}>Контакти</NavLink></li>
                     </ul>
                 </nav>
             </header >

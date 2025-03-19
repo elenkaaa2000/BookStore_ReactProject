@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useState } from "react"
 import requester from "../utils/requester"
 import useAuth from "../hooks/useAuth"
 import { UserContext } from "../context/UserContext"
@@ -44,4 +44,16 @@ export const useLogout = () => {
     return {
         isLoggedOut: !!accessToken
     }
+}
+
+export const useUserProfile = () => {
+    const [profile, setProfile] = useState([]);
+    const { options } = useAuth()
+
+    useEffect(() => {
+        requester.get(baseUrl + 'me', null, options)
+            .then(setProfile)
+    }, []);
+
+    return {profile}
 }

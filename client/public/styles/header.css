@@ -10,8 +10,10 @@
     color: black
 }
 
-.site-header li.active a {
-    color: orange
+.active {
+    padding: 0.5em 0.8em;
+    border-radius: 2em;
+    border: 1px solid orange
 }
 
 .site-header .mini-nav {

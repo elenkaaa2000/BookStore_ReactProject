@@ -12,6 +12,7 @@ import BookEdit from './components/BookEdit/BookEdit'
 import { useState } from 'react'
 import { UserContext } from './context/UserContext'
 import Logout from './components/Logout/Logout'
+import Profile from './components/Profile/Profile'
 
 function App() {
   const [authData, setAuthData] = useState();
@@ -38,6 +39,7 @@ function App() {
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
             <Route path='/logout' element={<Logout />} />
+            <Route path='/profile' element={<Profile />} />
           </Routes>
         </section>
         <Footer />

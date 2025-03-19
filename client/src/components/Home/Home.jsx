@@ -1,17 +1,8 @@
-import { useEffect, useState } from "react";
 import BookCatalogItem from "../BookCatalogItem/BookCatalogItem";
-import bookService from "../../services/bookService";
+import { useFetchLatestBooks } from "../../api/bookApi";
 
 export default function Home() {
-    const [books, setBooks] = useState([])
-
-    useEffect(() => {
-        bookService.getAll()
-            .then(result => {
-                setBooks(result)
-            })
-    }, []);
-        
+    const { books } = useFetchLatestBooks()
     return (
         <section className="section site-home">
             <section className="banner">
@@ -20,7 +11,8 @@ export default function Home() {
                     dicta in quo voluptate cupiditate ullam accusamus repellat.</h3>
             </section>
             <section className="featured-books">
-                {books.map(book => <BookCatalogItem key={book._id} {...book} />)}
+                {books.length > 0 ? books.map(book => <BookCatalogItem key={book._id} {...book} />) : (<h1>Няма наскоро добавени книги</h1>)}
+
             </section>
         </section>
 

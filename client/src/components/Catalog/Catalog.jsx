@@ -1,24 +1,24 @@
-import { useEffect, useState } from "react";
 import BookCatalogItem from "../BookCatalogItem/BookCatalogItem";
-import bookService from "../../services/bookService";
 import { useFetchData } from "../../api/bookApi";
+import { NavLink } from "react-router";
 
 export default function Catalog() {
     const { books } = useFetchData();
+
     
     return (
         <section className="section catalog">
             <h1>Каталог</h1>
             <nav>
                 <ul>
-                    <li className="active"><a href="#">Всички</a></li>
-                    <li><a href="#">Детска литература</a></li>
-                    <li><a href="#">Литература за тийнейджъри</a></li>
-                    <li><a href="#">Художествена литература</a></li>
-                    <li><a href="#">Научна литература</a></li>
-                    <li><a href="#">Енциклопедии</a></li>
-                    <li><a href="#">История и политика</a></li>
-                    <li><a href="#">Електронни книги</a></li>
+                    <li><NavLink to="#" /*className={({ isActive }) => isActive ? "active" : ""}*/>Всички</NavLink></li>
+                    <li><NavLink to="#" /*className={({ isActive }) => isActive ? "active" : ""}*/>Детска литература</NavLink></li>
+                    <li><NavLink to="#" /*className={({ isActive }) => isActive ? "active" : ""}*/>Литература за тийнейджъри</NavLink></li>
+                    <li><NavLink to="#" /*className={({ isActive }) => isActive ? "active" : ""}*/>Художествена литература</NavLink></li>
+                    <li><NavLink to="#" /*className={({ isActive }) => isActive ? "active" : ""}*/>Научна литература</NavLink></li>
+                    <li><NavLink to="#" /*className={({ isActive }) => isActive ? "active" : ""}*/>Енциклопедии</NavLink></li>
+                    <li><NavLink to="#" /*className={({ isActive }) => isActive ? "active" : ""}*/>История и политика</NavLink></li>
+                    <li><NavLink to="#" /*className={({ isActive }) => isActive ? "active" : ""}*/>Електронни книги</NavLink></li>
                 </ul>
             </nav>
             <section className="books">
