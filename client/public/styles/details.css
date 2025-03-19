@@ -152,10 +152,10 @@ input[type='submit']:hover {
     background: linear-gradient(rgb(212, 147, 43), rgb(230, 180, 100));
 }
 
-.action-buttons{
-   margin-top: 2rem;
-   display: flex;
-   gap:1em;
+.action-buttons {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1em;
 }
 
 .action-buttons button {
@@ -169,16 +169,13 @@ input[type='submit']:hover {
     cursor: pointer;
 }
 
-.action-buttons a{
+.action-buttons button a{
     text-decoration: none;
-    color:white
 }
 
-.action-buttons button:hover {
+.action-buttons button:hover,
+.action-buttons button a:hover
+ {
     background-color: rgb(230, 180, 100);
+    color: white;
 }
-
-
-
-
-

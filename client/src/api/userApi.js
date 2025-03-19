@@ -55,5 +55,5 @@ export const useUserProfile = () => {
             .then(setProfile)
     }, []);
 
-    return {profile}
+    return { profile }
 }
