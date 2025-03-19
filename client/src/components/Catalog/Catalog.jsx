@@ -1,15 +1,11 @@
 import { useEffect, useState } from "react";
 import BookCatalogItem from "../BookCatalogItem/BookCatalogItem";
 import bookService from "../../services/bookService";
+import { useFetchData } from "../../api/bookApi";
 
 export default function Catalog() {
-    const [books, setBooks] = useState([]);
-    useEffect(() => {
-        bookService.getAll()
-            .then(result => {
-                setBooks(result)
-            })
-    }, []);
+    const { books } = useFetchData();
+    
     return (
         <section className="section catalog">
             <h1>Каталог</h1>

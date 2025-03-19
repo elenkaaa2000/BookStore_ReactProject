@@ -1,22 +1,39 @@
-import bookService from "../../services/bookService";
+import { useActionState } from "react";
+
 
 import { useNavigate } from 'react-router'
+import { useCreateBook } from "../../api/bookApi";
 
 export default function BookCreate() {
     const navigate = useNavigate();
+    const { create } = useCreateBook
 
-    const submitAction = async (formData) => {
+    const createActionHandler = async (formData) => {
         const bookData = Object.fromEntries(formData);
-        const result = await bookService.createBook(bookData);
-
-        navigate('/catalog')
+        await create(bookData);
+        navigate('/catalog');
     }
+
+    const [_, createAction, isPending] = useActionState(createActionHandler, {
+        title: '',
+        author: '',
+        publisher: '',
+        published_year: '',
+        isbn: '',
+        categoty: '',
+        imageUrl: '',
+        pages: '',
+        language: '',
+        translator: '',
+        price: '',
+        description: ''
+    })
 
     return (
         <section className="section create-book">
 
             <h2>Добави книга</h2>
-            <form className="create-form" action={submitAction}>
+            <form className="create-form" action={createAction}>
 
                 <div className="field">
                     <label htmlFor="title">Заглавие</label>
@@ -35,7 +52,7 @@ export default function BookCreate() {
 
                 <div className="field">
                     <label htmlFor="published-year">Година на издаване</label>
-                    <input type="number" name="published_year" id="published-year" />
+                    <input type="number" name="published_year" id="published_year" />
                 </div>
 
                 <div className="field">

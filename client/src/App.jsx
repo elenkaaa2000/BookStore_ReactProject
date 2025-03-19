@@ -9,29 +9,40 @@ import Register from './components/Register/Register'
 import BookDetails from './components/BookDetails/BookDetails'
 import BookCreate from './components/BookCreate/BookCreate'
 import BookEdit from './components/BookEdit/BookEdit'
+import { useState } from 'react'
+import { UserContext } from './context/UserContext'
+import Logout from './components/Logout/Logout'
 
 function App() {
+  const [authData, setAuthData] = useState();
+  const UserLoginHandler = (result) => {
+    setAuthData(result)
+  };
 
+  const UserLogoutHandler = () => {
+    setAuthData({})
+  }
   return (
-    <>
+    <UserContext.Provider value={{ ...authData, UserLoginHandler, UserLogoutHandler }}>
       <div className="site-content">
         <Header />
         <section className="site-main">
           <Routes>
             <Route path='/' element={<Home />} />
-            <Route path='/catalog' element={<Catalog/>}/>
-            <Route path='/book/:bookId/details' element={<BookDetails/>} />
-            <Route path='/book/:bookId/edit'element={<BookEdit/>}/>
+            <Route path='/catalog' element={<Catalog />} />
+            <Route path='/book/:bookId/details' element={<BookDetails />} />
+            <Route path='/book/:bookId/edit' element={<BookEdit />} />
 
-            <Route path='/book/create' element={<BookCreate/>}/>         
-            <Route path='/login' element={<Login/>}/>
-            <Route path='/register' element={<Register/>}/>
-            
+            <Route path='/book/create' element={<BookCreate />} />
+
+            <Route path='/login' element={<Login />} />
+            <Route path='/register' element={<Register />} />
+            <Route path='/logout' element={<Logout />} />
           </Routes>
         </section>
         <Footer />
       </div>
-    </>
+    </UserContext.Provider>
   )
 }
 
