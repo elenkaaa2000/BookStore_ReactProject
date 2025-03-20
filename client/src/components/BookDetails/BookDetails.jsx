@@ -3,6 +3,7 @@ import { Link } from "react-router"
 import { useDeleteBook, useFetchBookDetails } from "../../api/bookApi";
 import { useContext } from "react";
 import { UserContext } from "../../context/UserContext";
+import BookComments from "../BookComments/BookComments";
 
 
 export default function BookDetails() {
@@ -101,55 +102,7 @@ export default function BookDetails() {
 
             <hr />
 
-            <section className="book-details-comments">
-
-                <section className="all-comments">
-                    <h3>Мнения</h3>
-                    <div className="comment">
-                        <h4>Автор: Ивайла</h4>
-                        <p>Направо ти взима дъха. Не може да спреш да четеш</p>
-                        <hr />
-                    </div>
-
-                    <div className="comment">
-                        <h4>Автор: Ивайла</h4>
-                        <p>Направо ти взима дъха. Не може да спреш да четеш</p>
-                        <hr />
-                    </div>
-                    <div className="comment">
-                        <h4>Автор: Ивайла</h4>
-                        <p>Направо ти взима дъха. Не може да спреш да четеш</p>
-                        <hr />
-                    </div>
-                    <div className="comment">
-                        <h4>Автор: Ивайла</h4>
-                        <p>Направо ти взима дъха. Не може да спреш да четеш</p>
-                        <hr />
-                    </div>
-                    <div className="comment">
-                        <h4>Автор: Ивайла</h4>
-                        <p>Направо ти взима дъха. Не може да спреш да четеш</p>
-                        <hr />
-                    </div>
-                </section>
-
-                <section className="add-comment">
-                    <h3>Вие оценявате <strong>Буря от оникс</strong></h3>
-                    <form action="#">
-                        <div className="field">
-                            <label htmlFor="author">Автор</label>
-                            <input type="text" id="author" name="author" />
-                        </div>
-                        <div className="field">
-                            <label htmlFor="author">Мнение</label>
-                            <textarea name="author" id="author"></textarea>
-                        </div>
-                        <input type="submit" value="Изпрати" />
-                    </form>
-                </section>
-
-            </section>
-
+            <BookComments />
         </section>
     )
 }

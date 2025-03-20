@@ -58,7 +58,11 @@
     color: orange
 }
 
-
+h1.empty{
+    margin-top: 8em;
+    font-size: 2rem;
+    color: #666;
+}
 .catalog nav ul {
     display: flex;
     margin-top: 2em;

@@ -1,67 +1,81 @@
-export default function BookEdit(){
-    return(
-        <section className="section edit-book"> 
-           
+import { useNavigate, useParams } from "react-router"
+import { useFetchBookDetails, useUpdateBook } from "../../api/bookApi";
+
+export default function BookEdit() {
+    const { bookId } = useParams();
+    const { book } = useFetchBookDetails(bookId);
+    const { updateBook} = useUpdateBook();
+    const navigate = useNavigate()
+
+    const formAction = async (formData) => {
+        const data = Object.fromEntries(formData);    
+        await updateBook(bookId, data)
+        navigate(`/book/${bookId}/details`)
+    }
+
+    return (
+        <section className="section edit-book">
+
             <h2>Редактирай книга</h2>
-            <form className="create-form" action="#">
+            <form className="create-form" action={formAction}>
 
                 <div className="field">
                     <label htmlFor="title">Заглавие</label>
-                    <input type="text" name="title" id="title"/>
+                    <input type="text" name="title" id="title" defaultValue={book.title} />
                 </div>
 
                 <div className="field">
                     <label htmlFor="author">Автор</label>
-                    <input type="text" name="author" id="author"/>
+                    <input type="text" name="author" id="author" defaultValue={book.author} />
                 </div>
 
                 <div className="field">
                     <label htmlFor="publisher">Издателство</label>
-                    <input type="text" name="publisher" id="publisher"/>
+                    <input type="text" name="publisher" id="publisher" defaultValue={book.publisher} />
                 </div>
 
                 <div className="field">
-                    <label htmlFor="published-year">Година на издаване</label>
-                    <input type="number" name="published-year" id="published-year"/>
+                    <label htmlFor="ppublished_year">Година на издаване</label>
+                    <input type="number" name="published_year" id="published_year" defaultValue={book.published_year} />
                 </div>
 
                 <div className="field">
                     <label htmlFor="isbn">ISBN</label>
-                    <input type="number" name="isbn" id="isbn"/>
+                    <input type="number" name="isbn" id="isbn" defaultValue={book.isbn} />
                 </div>
 
                 <div className="field">
-                    <label htmlFor="cover-image">Корица</label>
-                    <input type="text" name="cover-image" id="cover-image"/>
+                    <label htmlFor="imageUrl">Корица</label>
+                    <input type="text" name="imageUrl" id="imageUrl" defaultValue={book.imageUrl} />
                 </div>
 
                 <div className="field">
                     <label htmlFor="pages">Брой страници</label>
-                    <input type="number" name="pages" id="pages"/>
+                    <input type="number" name="pages" id="pages" defaultValue={book.pages} />
                 </div>
 
                 <div className="field">
                     <label htmlFor="language">Език</label>
-                    <input type="language" name="language" id="language"/>
+                    <input type="language" name="language" id="language" defaultValue={book.language} />
                 </div>
 
                 <div className="field">
                     <label htmlFor="translator">Преводач</label>
-                    <input type="text" name="translator" id="translator"/>
+                    <input type="text" name="translator" id="translator" defaultValue={book.translator} />
                 </div>
 
                 <div className="field">
                     <label htmlFor="price">Цена</label>
-                    <input type="number" name="price" id="price"/>
+                    <input type="number" name="price" id="price" defaultValue={book.price} />
                 </div>
 
                 <div className="field-description">
-                    <label htmlFor="description">Описание</label>                    
-                    <textarea name="d" id=""></textarea>
+                    <label htmlFor="description">Описание</label>
+                    <textarea name="description" id="description" defaultValue={book.description}></textarea>
                 </div>
-                <input type="submit" value="Промени"/>
-            </form>  
+                <input type="submit" value="Промени" />
+            </form>
 
-    </section>
+        </section>
     )
 }

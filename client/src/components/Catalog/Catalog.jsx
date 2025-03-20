@@ -5,7 +5,7 @@ import { NavLink } from "react-router";
 export default function Catalog() {
     const { books } = useFetchData();
 
-    
+
     return (
         <section className="section catalog">
             <h1>Каталог</h1>
@@ -21,13 +21,12 @@ export default function Catalog() {
                     <li><NavLink to="#" /*className={({ isActive }) => isActive ? "active" : ""}*/>Електронни книги</NavLink></li>
                 </ul>
             </nav>
-            <section className="books">
-                {books.map(book =>
-                    <BookCatalogItem
-                        key={book._id}
-                        {...book} />)}
-            </section>
-
+            {books.length > 0 ? (
+                <section className="books">
+                    {books.map(book => <BookCatalogItem key={book._id} {...book} />)}
+                </section>)
+                :
+                (<h1 className="empty">Няма добавени книги</h1>)}
         </section>
     )
 }

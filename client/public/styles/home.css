@@ -30,3 +30,9 @@
     position: relative;
     flex-wrap: wrap;
 }
+
+.featured-books h1.empty{
+    margin-top: 3em;
+    font-size: 2rem;
+    color: #666;
+}

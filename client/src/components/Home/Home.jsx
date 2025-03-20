@@ -11,7 +11,7 @@ export default function Home() {
                     dicta in quo voluptate cupiditate ullam accusamus repellat.</h3>
             </section>
             <section className="featured-books">
-                {books.length > 0 ? books.map(book => <BookCatalogItem key={book._id} {...book} />) : (<h1>Няма наскоро добавени книги</h1>)}
+                {books.length > 0 ? books.map(book => <BookCatalogItem key={book._id} {...book} />) : (<h1 className="empty">Няма наскоро добавени книги</h1>)}
 
             </section>
         </section>

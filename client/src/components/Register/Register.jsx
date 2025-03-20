@@ -31,7 +31,7 @@ export default function Register() {
     return (
         <section className="section register-page">
             <div className="image">
-                <img src="./register-image.jpg" alt="" />
+                <img src="images/register-image.jpg" alt="" />
             </div>
             <div className="login-form-container">
                 <h2>Регистрация</h2>
