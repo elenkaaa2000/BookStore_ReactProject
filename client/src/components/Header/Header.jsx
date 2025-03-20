@@ -25,6 +25,7 @@ export default function Header() {
                                 (<>
                                     <li><NavLink to="/logout" className={({ isActive }) => isActive ? "active" : ""}>Излез</NavLink></li>
                                     <li><NavLink to="/profile" className={({ isActive }) => isActive ? "active" : ""}>Профил</NavLink></li>
+                                    <li><NavLink to="/wishlist" className={({ isActive }) => isActive ? "active" : ""}><i className="fa-solid fa-heart"></i></NavLink></li>
                                 </>)}
                         </ul>
                     </nav>

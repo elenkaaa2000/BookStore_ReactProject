@@ -124,6 +124,7 @@
 }
 
 
+
 label {
     display: block;
     margin-bottom: 5px;
@@ -171,6 +172,11 @@ input[type='submit']:hover {
     cursor: pointer;
 }
 
+.action-buttons .disabled-btn{
+    cursor:not-allowed;
+    background-color: #ccc;
+}
+
 .action-buttons button a{
     text-decoration: none;
 }
@@ -180,6 +186,11 @@ input[type='submit']:hover {
  {
     background-color: rgb(230, 180, 100);
     color: white;
+}
+
+.action-buttons button.disabled-btn:hover{
+    color: #555555;
+    background-color: #ccc;
 }
 
 .book-details-comments .empty{

@@ -13,6 +13,8 @@ import { useState } from 'react'
 import { UserContext } from './context/UserContext'
 import Logout from './components/Logout/Logout'
 import Profile from './components/Profile/Profile'
+import Contacts from './components/Contacts/Contacts'
+import Wishlist from './components/Wishlist/Wishlist'
 
 function App() {
   const [authData, setAuthData] = useState();
@@ -40,6 +42,9 @@ function App() {
             <Route path='/register' element={<Register />} />
             <Route path='/logout' element={<Logout />} />
             <Route path='/profile' element={<Profile />} />
+            <Route path='/wishlist' element={<Wishlist />} />
+
+            <Route path='/contacts' element={<Contacts />} />
           </Routes>
         </section>
         <Footer />
