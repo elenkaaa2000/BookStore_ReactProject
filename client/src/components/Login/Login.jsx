@@ -5,7 +5,7 @@ import { UserContext } from "../../context/UserContext";
 
 export default function Login() {
     const { login } = useLogin();
-    const {UserLoginHandler} = useContext(UserContext)
+    const { UserLoginHandler } = useContext(UserContext)
     const navigate = useNavigate();
 
     const loginActionHandler = async (_, formData) => {
@@ -13,7 +13,7 @@ export default function Login() {
         const authData = await login(values.email, values.password);
         UserLoginHandler(authData);
 
-        navigate('/')
+        navigate(-1)
     }
     const [_, loginAction, isPending] = useActionState(loginActionHandler, {
         email: '',

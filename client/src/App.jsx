@@ -15,6 +15,7 @@ import Contacts from './components/Contacts/Contacts'
 import Wishlist from './components/Wishlist/Wishlist'
 
 import UserProvider from './providers/UserProvider'
+import AuthGuard from './guards/AuthGuard'
 
 function App() {
 
@@ -27,16 +28,17 @@ function App() {
             <Route path='/' element={<Home />} />
             <Route path='/catalog' element={<Catalog />} />
             <Route path='/book/:bookId/details' element={<BookDetails />} />
-            <Route path='/book/:bookId/edit' element={<BookEdit />} />
+            <Route element={<AuthGuard />}>
 
-            <Route path='/book/create' element={<BookCreate />} />
+              <Route path='/book/:bookId/edit' element={<BookEdit />} />
+              <Route path='/book/create' element={<BookCreate />} />
+              <Route path='/logout' element={<Logout />} />
+              <Route path='/profile' element={<Profile />} />
+              <Route path='/wishlist' element={<Wishlist />} />
 
+            </Route>
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
-            <Route path='/logout' element={<Logout />} />
-            <Route path='/profile' element={<Profile />} />
-            <Route path='/wishlist' element={<Wishlist />} />
-
             <Route path='/contacts' element={<Contacts />} />
           </Routes>
         </section>

@@ -1,8 +1,9 @@
 import { useContext } from 'react'
 import { Link, NavLink } from 'react-router'
 import { UserContext } from '../../context/UserContext'
+import useAuth from '../../hooks/useAuth'
 export default function Header() {
-    const { username } = useContext(UserContext)
+    const {isAuthenticated} = useAuth()
     return (
         <>
             <header className="section site-header">
@@ -16,7 +17,7 @@ export default function Header() {
                     </div>
                     <nav>
                         <ul>
-                            {!username ? (
+                            {!isAuthenticated ? (
                                 <>
                                     <li><NavLink to="/login" className={({ isActive }) => isActive ? "active" : ""}>Влез</NavLink></li>
                                     <li><NavLink to="/register" className={({ isActive }) => isActive ? "active" : ""}>Регистрация</NavLink></li>
@@ -36,7 +37,7 @@ export default function Header() {
                     <ul>
                         <li><NavLink to="/" className={({ isActive }) => isActive ? "active" : ""}>Начална страница</NavLink></li>
                         <li><NavLink to="/catalog" className={({ isActive }) => isActive ? "active" : ""}>Каталог</NavLink></li>
-                        {username && (<li><NavLink to="/book/create" className={({ isActive }) => isActive ? "active" : ""}>Добави книга</NavLink></li>)}
+                        {isAuthenticated && (<li><NavLink to="/book/create" className={({ isActive }) => isActive ? "active" : ""}>Добави книга</NavLink></li>)}
 
                         <li><NavLink to="/blog" className={({ isActive }) => isActive ? "active" : ""}>Блог</NavLink></li>
                         <li><NavLink to="/contacts" className={({ isActive }) => isActive ? "active" : ""}>Контакти</NavLink></li>
