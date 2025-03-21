@@ -2,6 +2,7 @@ import { useState } from 'react'
 export default function usePersistedState(stateKey, initialState) {
     const [state, setState] = useState(() => {
         const persistedStateJSON = localStorage.getItem(stateKey);
+        
         if (!persistedStateJSON) {
             return typeof initialState == 'function'
                 ?
@@ -19,11 +20,11 @@ export default function usePersistedState(stateKey, initialState) {
             ? input(state)
             : input;
 
-        const persistedData = JSON.stringify(authData);
+        const persistedData = JSON.stringify(data);
 
         localStorage.setItem('auth', persistedData);
 
-        setState(authData)
+        setState(data)
     };
 
     return [
