@@ -1,9 +1,10 @@
-import { useNavigate, useParams } from "react-router"
+import { Navigate, useNavigate, useParams } from "react-router"
 import { Link } from "react-router"
 import { useDeleteBook, useFetchBookDetails } from "../../api/bookApi";
 import { useContext } from "react";
 import { UserContext } from "../../context/UserContext";
 import BookComments from "../BookComments/BookComments";
+import { useFetchAllLikedBooks, useLikeBook } from "../../api/likesApi";
 
 
 export default function BookDetails() {
@@ -11,9 +12,14 @@ export default function BookDetails() {
     const { _id: userId } = useContext(UserContext);
     const { book } = useFetchBookDetails(bookId);
     const { deleteBook } = useDeleteBook();
+    const { likeBook } = useLikeBook()
     const navigate = useNavigate()
 
     const isOwner = userId === book._ownerId;
+
+    const { likedBooks } = useFetchAllLikedBooks(userId);
+    const hasLiked = likedBooks.some(like => like.bookId === bookId);
+
 
     const deleteBookHandler = async () => {
         const hasConfirm = confirm('Are you sure?')
@@ -23,6 +29,18 @@ export default function BookDetails() {
         await deleteBook(bookId)
         navigate('/catalog')
     }
+
+    const title = book.title;
+    const imageUrl = book.imageUrl;
+    const author = book.author;
+    const price = book.price;
+
+    const likeBookHandler = async () => {
+        await likeBook(bookId, title, imageUrl, author, price);
+    }
+
+    
+
     return (
         <section className="section book-details">
             <section className="book-details-content">
@@ -34,7 +52,7 @@ export default function BookDetails() {
                         <h2>{book.title}</h2>
                         <p><span>Издател:</span> {book.publisher}</p>
                         <p><span>Автор:</span> {book.author}</p>
-                        <p><span>Цена:</span> {book.price}</p>
+                        <p><span>Цена:</span> {book.price} лв.</p>
                         <div className="book-review">
                             <h3>Описание</h3>
                             <p>{book.description}</p>
@@ -90,7 +108,10 @@ export default function BookDetails() {
                                     <button onClick={deleteBookHandler}>Изтрий</button>
                                 </>)
                                 :
-                                (<button><Link to={`/book/${bookId}/buy`}>Купи</Link></button>)}
+                                (<>
+                                    <button>Купи</button>
+                                    <button onClick={likeBookHandler} className={hasLiked ? 'disabled-btn' : null}>Добави в <i class="fa-solid fa-heart"></i></button>
+                                </>)}
 
                         </div>
                     )}
@@ -102,7 +123,7 @@ export default function BookDetails() {
 
             <hr />
 
-            <BookComments />
+            <BookComments bookId={bookId}/>
         </section>
     )
 }

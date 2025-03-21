@@ -28,14 +28,15 @@ export const useFetchAllLikedBooks = (userId) => {
             .then(setLikedBooks)
     }, [userId])
 
-    return { likedBooks }
+    return { likedBooks, setLikedBooks }
 }
 
 export const useDislikeBook = () => {
     const { options } = useAuth()
-    const dislikeBook = (likeId) => {
-        requester.delete(`${baseUrl}/${likeId}`, null, options)
+    const dislikeBook = async (likeId) => {
+        const response = await requester.delete(`${baseUrl}/${likeId}`, null, options);
+        return response
     }
-    return {dislikeBook}
+    return { dislikeBook }
 }
 

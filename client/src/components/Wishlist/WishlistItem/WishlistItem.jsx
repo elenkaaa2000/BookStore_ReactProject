@@ -6,17 +6,20 @@ export default function WishlistItem({
     title,
     imageUrl,
     author,
-    price
+    price,
+    onEditList
 }) {
 
-    const { dislikeBook } = useDislikeBook()
+    const { dislikeBook } = useDislikeBook();
+
     const dislikeBookClickHandler = async (_id) => {
         const hasConfirm = confirm('Are you sure?')
         if (!hasConfirm) {
             return
         }
-
-        await dislikeBook(_id);
+ 
+       await dislikeBook(_id);
+       onEditList(_id);
     }
 
     return (

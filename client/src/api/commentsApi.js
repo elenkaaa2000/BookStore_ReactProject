@@ -6,9 +6,10 @@ const baseUrl = `http://localhost:3030/data/comments`;
 
 export const useCreateComment = () => {
     const { options } = useAuth()
-    const createComment = (bookId, data, firstName, lastName) => {
+    const createComment = async (bookId, data, firstName, lastName) => {
         const userFullName = `${firstName} ${lastName}`
-        requester.post(baseUrl, { ...data, bookId, userFullName }, options)
+        const result = await requester.post(baseUrl, { ...data, bookId, userFullName }, options);
+        return result
     }
 
     return {
@@ -25,7 +26,7 @@ export const useFetchBookComments = (bookId) => {
         });
 
         requester.get(`${baseUrl}?${searchParams.toString()}`)
-        .then(setComments)
+            .then(setComments)
     }, [bookId]);
 
     return {
@@ -33,3 +34,4 @@ export const useFetchBookComments = (bookId) => {
         setComments
     }
 }
+

@@ -1,25 +1,30 @@
-import { useParams } from "react-router";
-import { useFetchBookComments } from "../../api/commentsApi";
-import CreateBookComment from "../CreateBookComment/CreateBookComment";
-import BookCommentItem from "./BookCommentItem/BookCommentItem";
+import { useContext } from "react";
+import { useCreateComment, useFetchBookComments } from "../../api/commentsApi"
+import CreateBookComment from "./CreateBookComment"
+import { UserContext } from "../../context/UserContext";
+import BookCommentItem from "./BookCommentItem";
 
-export default function BookComments() {
-    const {bookId} = useParams()
+export default function BookComments({
+    bookId
+}) {
     const { comments, setComments } = useFetchBookComments(bookId);
+    const { firstName, lastName } = useContext(UserContext);
+    const { createComment } = useCreateComment();
+
+    const createCommentHandler = async (commentData) => {
+        const newComment = await createComment(bookId, commentData, firstName, lastName);
+        setComments(state => [...state, newComment])
+    }
+
 
     return (
         <section className="book-details-comments">
-            {comments.length > 0 ?
-                (
-                    <section className="all-comments">
-                        <h3>Мнения</h3>
-                        {comments.map(c => <BookCommentItem key={c._id} {...c}/>)}
+            <section className="all-comments">
+                <h3>Мнения</h3>
+                {comments.length > 0 ? comments.map(c=> <BookCommentItem key={c._id} {...c}/>) : (<h1>Все още няма добавени коментари към книгата.</h1>)}
+            </section>
+            <CreateBookComment bookId={bookId} onComment={createCommentHandler} />
 
-                    </section>
-                ) :
-                (<h1 className="empty">Книгата все още не е оценена от нашите потребители</h1>)}
-
-            <CreateBookComment bookId={bookId} setComments = {setComments}/>
         </section>
     )
 }
