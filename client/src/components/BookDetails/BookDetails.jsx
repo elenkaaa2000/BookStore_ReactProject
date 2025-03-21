@@ -20,7 +20,6 @@ export default function BookDetails() {
     const { likedBooks } = useFetchAllLikedBooks(userId);
     const hasLiked = likedBooks.some(like => like.bookId === bookId);
 
-
     const deleteBookHandler = async () => {
         const hasConfirm = confirm('Are you sure?')
         if (!hasConfirm) {

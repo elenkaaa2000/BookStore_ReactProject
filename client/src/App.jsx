@@ -9,15 +9,16 @@ import Register from './components/Register/Register'
 import BookDetails from './components/BookDetails/BookDetails'
 import BookCreate from './components/BookCreate/BookCreate'
 import BookEdit from './components/BookEdit/BookEdit'
-import { useState } from 'react'
+
 import { UserContext } from './context/UserContext'
 import Logout from './components/Logout/Logout'
 import Profile from './components/Profile/Profile'
 import Contacts from './components/Contacts/Contacts'
 import Wishlist from './components/Wishlist/Wishlist'
+import usePersistedState from './hooks/usePersistedState'
 
 function App() {
-  const [authData, setAuthData] = useState();
+  const [authData, setAuthData] = usePersistedState('auth',{});
   const UserLoginHandler = (result) => {
     setAuthData(result)
   };
