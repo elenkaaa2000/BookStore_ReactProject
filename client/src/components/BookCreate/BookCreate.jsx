@@ -8,6 +8,8 @@ export default function BookCreate({onCreate}) {
     const createAction = async (formData) => {
         const data = Object.fromEntries(formData);
          await create(data);  
+
+         navigate('/catalog')
     }
 
 

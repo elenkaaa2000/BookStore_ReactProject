@@ -8,11 +8,11 @@ export default function BookComments({
     bookId
 }) {
     const { comments, setComments } = useFetchBookComments(bookId);
-    const { firstName, lastName } = useContext(UserContext);
+    const { name } = useContext(UserContext);
     const { createComment } = useCreateComment();
 
     const createCommentHandler = async (commentData) => {
-        const newComment = await createComment(bookId, commentData, firstName, lastName);
+        const newComment = await createComment(bookId, commentData, name);
         setComments(state => [...state, newComment])
     }
 

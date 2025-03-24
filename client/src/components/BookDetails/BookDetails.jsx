@@ -1,7 +1,7 @@
-import { Navigate, useNavigate, useParams } from "react-router"
+import { useNavigate, useParams } from "react-router"
 import { Link } from "react-router"
 import { useDeleteBook, useFetchBookDetails } from "../../api/bookApi";
-import { useContext } from "react";
+import { useContext, useState,useEffect } from "react";
 import { UserContext } from "../../context/UserContext";
 import BookComments from "../BookComments/BookComments";
 import { useFetchAllLikedBooks, useLikeBook } from "../../api/likesApi";
@@ -12,13 +12,18 @@ export default function BookDetails() {
     const { _id: userId } = useContext(UserContext);
     const { book } = useFetchBookDetails(bookId);
     const { deleteBook } = useDeleteBook();
-    const { likeBook } = useLikeBook()
-    const navigate = useNavigate()
+    const { likeBook } = useLikeBook();
+    const navigate = useNavigate();
 
     const isOwner = userId === book._ownerId;
+    const { likedBooks: initialState } = useFetchAllLikedBooks(userId);
+    const [likedBooks, setLikedBooks] = useState(initialState || []);
 
-    const { likedBooks } = useFetchAllLikedBooks(userId);
-    const hasLiked = likedBooks.some(like => like.bookId === bookId);
+    useEffect(() => {
+        setLikedBooks(initialState);
+    }, [initialState]);
+
+    const isLiked = likedBooks?.some(likedBook => likedBook.bookId === bookId);
 
     const deleteBookHandler = async () => {
         const hasConfirm = confirm('Are you sure?')
@@ -35,11 +40,11 @@ export default function BookDetails() {
     const price = book.price;
 
     const likeBookHandler = async () => {
+        if (isLiked) return;
         await likeBook(bookId, title, imageUrl, author, price);
+        
+        setLikedBooks([...likedBooks, { bookId }]);
     }
-
-    
-
     return (
         <section className="section book-details">
             <section className="book-details-content">
@@ -109,7 +114,10 @@ export default function BookDetails() {
                                 :
                                 (<>
                                     <button>Купи</button>
-                                    <button onClick={likeBookHandler} className={hasLiked ? 'disabled-btn' : null}>Добави в <i class="fa-solid fa-heart"></i></button>
+                                    <button onClick={likeBookHandler}
+                                        disabled={isLiked}
+                                        className={isLiked ? 'disabled-btn' : null}
+                                    > Добави в <i className="fa-solid fa-heart"></i></button>
                                 </>)}
 
                         </div>
@@ -122,7 +130,7 @@ export default function BookDetails() {
 
             <hr />
 
-            <BookComments bookId={bookId}/>
+            <BookComments bookId={bookId} />
         </section>
     )
 }

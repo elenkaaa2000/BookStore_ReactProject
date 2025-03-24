@@ -24,7 +24,7 @@ export default function WishlistItem({
 
     return (
         <div className="book-template">
-            <div class="remove-btn"><button onClick={() => dislikeBookClickHandler(_id)}><i class="fa-solid fa-heart-circle-minus"></i></button></div>
+            <div className="remove-btn"><button onClick={() => dislikeBookClickHandler(_id)}><i className="fa-solid fa-heart-circle-minus"></i></button></div>
             <div className="book-image">
                 <img src={imageUrl} alt={title} />
             </div>

@@ -15,8 +15,8 @@ export const useLogin = () => {
 }
 
 export const useRegister = () => {
-    const register = async (email, username, firstName, lastName, password) => {
-        return requester.post(baseUrl + 'register', { email, username, firstName, lastName, password })
+    const register = async (email, username, name, address, password) => {
+        return requester.post(baseUrl + 'register', { email, username, name, address, password })
     }
 
     return {
@@ -55,5 +55,17 @@ export const useUserProfile = () => {
             .then(setProfile)
     }, []);
 
-    return { profile }
+    return { profile, setProfile }
 }
+
+/*
+export const useEditProfile = () =>{
+    const {options} = useAuth()
+    const editProfile = async (data) =>{
+        const response = await requester.post(baseUrl+'me', {...data}, options);
+        return response
+    }
+
+    return {editProfile}
+}
+    */

@@ -24,9 +24,12 @@ export default function Header() {
                                 </>)
                                 :
                                 (<>
-                                    <li><NavLink to="/logout" className={({ isActive }) => isActive ? "active" : ""}>Излез</NavLink></li>
-                                    <li><NavLink to="/profile" className={({ isActive }) => isActive ? "active" : ""}>Профил</NavLink></li>
+                                    
+                                    <li><NavLink to="/profile" className={({ isActive }) => isActive ? "active" : ""}><i className="fa-solid fa-user"></i></NavLink></li>
                                     <li><NavLink to="/wishlist" className={({ isActive }) => isActive ? "active" : ""}><i className="fa-solid fa-heart"></i></NavLink></li>
+                                    <li><NavLink to="/shopCart" className={({ isActive }) => isActive ? "active" : ""}><i className="fa-solid fa-cart-shopping"></i></NavLink></li>
+                                    
+                                    <li><NavLink to="/logout" className={({ isActive }) => isActive ? "active" : ""}>Излез</NavLink></li>
                                 </>)}
                         </ul>
                     </nav>

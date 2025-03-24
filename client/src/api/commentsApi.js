@@ -6,9 +6,9 @@ const baseUrl = `http://localhost:3030/data/comments`;
 
 export const useCreateComment = () => {
     const { options } = useAuth()
-    const createComment = async (bookId, data, firstName, lastName) => {
-        const userFullName = `${firstName} ${lastName}`
-        const result = await requester.post(baseUrl, { ...data, bookId, userFullName }, options);
+    const createComment = async (bookId, data, name) => {
+       
+        const result = await requester.post(baseUrl, { ...data, bookId, name}, options);
         return result
     }
 

@@ -1,5 +1,5 @@
 import { useActionState, useContext } from 'react'
-import {useNavigate} from 'react-router'
+import { useNavigate } from 'react-router'
 import { useRegister } from '../../api/userApi';
 import { UserContext } from '../../context/UserContext';
 
@@ -16,15 +16,15 @@ export default function Register() {
             return
         }
 
-        const authData = await register(values.email, values.username, values.firstName, values.lastName, values.password)
+        const authData = await register(values.email, values.username, values.name, values.address, values.password)
         UserLoginHandler(authData);
         navigate('/')
     }
     const [_, registerAction, isPending] = useActionState(registerActionHandler, {
         username: '',
         email: '',
-        firstName: '',
-        lastName: '',
+        name: '',
+        adress: '',
         password: ''
     });
 
@@ -46,12 +46,12 @@ export default function Register() {
                         <input type="email" name="email" id="email" />
                     </div>
                     <div className="field">
-                        <label htmlFor="firstName">Име</label>
-                        <input type="text" name="firstName" id="firstName" />
+                        <label htmlFor="name">Име и фамилия</label>
+                        <input type="text" name="name" id="name" />
                     </div>
                     <div className="field">
-                        <label htmlFor="lastName">Фамилия</label>
-                        <input type="text" name="lastName" id="lastName" />
+                        <label htmlFor="address">Адрес</label>
+                        <input type="text" name="address" id="address" />
                     </div>
 
 

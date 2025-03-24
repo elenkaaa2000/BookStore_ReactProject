@@ -17,6 +17,7 @@ import Wishlist from './components/Wishlist/Wishlist'
 import UserProvider from './providers/UserProvider'
 import AuthGuard from './guards/AuthGuard'
 import GuestGuard from './guards/GuestGuard'
+import ShopCard from './components/ShopCart/ShopCart'
 
 function App() {
 
@@ -35,6 +36,7 @@ function App() {
               <Route path='/logout' element={<Logout />} />
               <Route path='/profile' element={<Profile />} />
               <Route path='/wishlist' element={<Wishlist />} />
+              <Route path='/shopCart' element={<ShopCard />} />
             </Route>
 
             <Route element={<GuestGuard />}>
