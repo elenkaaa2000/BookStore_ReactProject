@@ -1,12 +1,13 @@
 import { useContext } from "react";
 import { useDeleteShopBook, useFetchShopCart } from "../../api/buyBookApi"
 import { UserContext } from "../../context/UserContext";
-import { Link } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 
 export default function ShopCard() {
     const { _id: userId } = useContext(UserContext)
     const { books, setBooks } = useFetchShopCart(userId);
-    const { deleteBook } = useDeleteShopBook()
+    const { deleteBook } = useDeleteShopBook();
+    const navigate = useNavigate()
 
     const removeBook = async (_id) => {
         const hasConfirm = confirm('Are you sure?')
@@ -24,6 +25,10 @@ export default function ShopCard() {
         total += currentPrice
 
     })
+
+    const finalizeShopHandler = () => {
+        navigate('/shopCart/finalizeShop')
+    }
 
     return (
         <>
@@ -53,7 +58,7 @@ export default function ShopCard() {
                         <p>Обща сума: {total} лв. </p>
                     </div>
                 </div>
-                <button className="finish">Завърши поръчката</button>
+                <button className="finish" onClick={finalizeShopHandler}>Завърши поръчката</button>
             </section>
         </>
     )

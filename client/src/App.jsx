@@ -18,6 +18,7 @@ import UserProvider from './providers/UserProvider'
 import AuthGuard from './guards/AuthGuard'
 import GuestGuard from './guards/GuestGuard'
 import ShopCard from './components/ShopCart/ShopCart'
+import FinalizeShop from './components/ShopCart/FinalizeShop/FinalizeShop'
 
 function App() {
 
@@ -37,6 +38,7 @@ function App() {
               <Route path='/profile' element={<Profile />} />
               <Route path='/wishlist' element={<Wishlist />} />
               <Route path='/shopCart' element={<ShopCard />} />
+              <Route path='/shopCart/finalizeShop' element={<FinalizeShop />} />
             </Route>
 
             <Route element={<GuestGuard />}>

@@ -1,0 +1,15 @@
+h1{
+   text-align: center;
+   margin-top: 2em;
+   padding-bottom: 2rem;
+
+}
+h3{
+    text-align: center;
+}
+h3 a{
+    text-decoration: none;
+    color: orange;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
