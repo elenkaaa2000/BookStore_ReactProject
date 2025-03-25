@@ -1,0 +1,110 @@
+.shop-cart {
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 3em;
+}
+
+.shop-cart h1 {
+    text-align: center;
+    color: orange;
+    font-size: 1.5rem;
+}
+
+.shop-cart .wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.shop-cart .books {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    justify-content: space-between;
+    align-items: center;
+   margin-top: 2em;
+}
+
+.shop-cart .book {
+    width: 800px;
+    display: flex; 
+    padding: 2em;   
+    align-items: center;
+    justify-content: space-between;
+    flex-grow: 1;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.shop-cart .book .description {
+    display: flex;
+    align-items: center;
+    gap: 3em
+}
+
+.shop-cart .description img {
+    width: 60px;
+    height: 90px;
+    border-radius: 5px;
+}
+
+.shop-cart .description h3 {
+    font-size: 1em;
+    color: #555;
+    font-weight: normal;
+}
+
+.shop-cart .price p {  
+    color: #555;
+    margin-right: 5em;
+}
+
+.shop-cart .buttons {
+    display: flex;
+    gap: 1em;
+}
+
+.shop-cart button.finish {
+    background: rgb(249, 200, 111);
+    ;
+    color: white;
+    border: none;
+    display: block;
+    margin: 0 auto;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+.shop-cart button a{
+    text-decoration: none;
+    color: white;
+}
+.shop-cart button {
+    background: rgb(249, 200, 111);
+    ;
+    color: white;
+    border: none;
+    display: block;
+
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.shop-cart button:hover {
+    background: orange;
+}
+
+.shop-cart .total-price {
+    text-align: right;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #222;
+}

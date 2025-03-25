@@ -8,7 +8,7 @@ export default function CreateBookComment({
     }
     return (
         <section className="add-comment">
-            <h3>Вие оценявате <strong>Буря от оникс</strong></h3>
+            <h3>Вашето мнение е важно за нас</h3>
             <form action={formAction}>
                 <div className="field">
                     <label htmlFor="comment">Мнение</label>

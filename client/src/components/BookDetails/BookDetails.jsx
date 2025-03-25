@@ -1,10 +1,11 @@
 import { useNavigate, useParams } from "react-router"
 import { Link } from "react-router"
 import { useDeleteBook, useFetchBookDetails } from "../../api/bookApi";
-import { useContext, useState,useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../../context/UserContext";
 import BookComments from "../BookComments/BookComments";
 import { useFetchAllLikedBooks, useLikeBook } from "../../api/likesApi";
+import { useBuyBook, useFetchShopCart } from "../../api/buyBookApi";
 
 
 export default function BookDetails() {
@@ -14,8 +15,15 @@ export default function BookDetails() {
     const { deleteBook } = useDeleteBook();
     const { likeBook } = useLikeBook();
     const navigate = useNavigate();
+    const { buyBook } = useBuyBook()
 
     const isOwner = userId === book._ownerId;
+    const title = book.title;
+    const imageUrl = book.imageUrl;
+    const author = book.author;
+    const price = book.price;
+
+    //Like
     const { likedBooks: initialState } = useFetchAllLikedBooks(userId);
     const [likedBooks, setLikedBooks] = useState(initialState || []);
 
@@ -25,6 +33,35 @@ export default function BookDetails() {
 
     const isLiked = likedBooks?.some(likedBook => likedBook.bookId === bookId);
 
+    const likeBookHandler = async () => {
+        if (isLiked) return;
+        await likeBook(bookId, title, imageUrl, author, price);
+
+        setLikedBooks([...likedBooks, { bookId }]);
+    }
+
+    //Buy
+    const { books: initialShopState } = useFetchShopCart(userId);
+    const [shopBooks, setShopBooks] = useState(initialShopState || []);
+
+    useEffect(() => {
+        setShopBooks(initialShopState)
+    }, [initialShopState]);
+
+    const isBought = shopBooks?.some(shopBook => shopBook.bookId === bookId);
+    console.log(isBought);
+
+
+    const buyBookHandler = async () => {
+        if (isBought) {
+            return
+        }
+        await buyBook(bookId, title, imageUrl, price);
+        setShopBooks([...shopBooks, { bookId }])
+
+    }
+
+    //Delete Book
     const deleteBookHandler = async () => {
         const hasConfirm = confirm('Are you sure?')
         if (!hasConfirm) {
@@ -34,17 +71,6 @@ export default function BookDetails() {
         navigate('/catalog')
     }
 
-    const title = book.title;
-    const imageUrl = book.imageUrl;
-    const author = book.author;
-    const price = book.price;
-
-    const likeBookHandler = async () => {
-        if (isLiked) return;
-        await likeBook(bookId, title, imageUrl, author, price);
-        
-        setLikedBooks([...likedBooks, { bookId }]);
-    }
     return (
         <section className="section book-details">
             <section className="book-details-content">
@@ -113,7 +139,11 @@ export default function BookDetails() {
                                 </>)
                                 :
                                 (<>
-                                    <button>Купи</button>
+                                    <button
+                                        onClick={buyBookHandler}
+                                        disabled={isBought}
+                                        className={isBought ? 'disabled-btn' : null}
+                                    >Купи</button>
                                     <button onClick={likeBookHandler}
                                         disabled={isLiked}
                                         className={isLiked ? 'disabled-btn' : null}
