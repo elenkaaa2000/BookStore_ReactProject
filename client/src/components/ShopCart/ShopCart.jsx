@@ -58,7 +58,11 @@ export default function ShopCard() {
                         <p>Обща сума: {total} лв. </p>
                     </div>
                 </div>
-                <button className="finish" onClick={finalizeShopHandler}>Завърши поръчката</button>
+                <button 
+                onClick={finalizeShopHandler}
+                disabled = {books.length ==0}
+                className={books.length ==0 ? 'finish disabled-btn' :'finish' }
+                >Завърши поръчката</button>
             </section>
         </>
     )

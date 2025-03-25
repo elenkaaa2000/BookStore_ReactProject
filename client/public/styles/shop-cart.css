@@ -108,3 +108,13 @@
     font-weight: bold;
     color: #222;
 }
+
+.shop-cart .books h2{
+    color: #555;
+    font-size: 1.2rem;
+}
+
+.shop-cart button.finish.disabled-btn{
+    cursor:not-allowed;
+    background-color: #ccc;
+}
