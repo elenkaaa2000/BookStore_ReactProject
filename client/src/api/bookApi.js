@@ -8,7 +8,7 @@ export const useFetchData = (category) => {
     const [books, setBooks] = useState([]);
 
     useEffect(() => {
-        if (category == `Всички`) {
+        if (category == `Всички` || category == '') {
             requester.get(baseUrl)
                 .then(setBooks)
         } else {
@@ -25,6 +25,28 @@ export const useFetchData = (category) => {
     return {
         books,
         setBooks
+    }
+}
+
+export const useFetchSearchData = () => {
+    const [searchResult, setSearchResult] = useState([]);
+
+    const searchBook = async (search) => {
+        if(search === "") {
+            setSearchResult([]);
+            return
+        };
+        
+        const searchParams = new URLSearchParams({
+            where: `title LIKE "${search}"`
+        });
+
+        const response = await requester.get(`${baseUrl}?${searchParams.toString()}`)
+        setSearchResult(response)
+    }
+    return {
+        searchBook,
+        searchResult
     }
 }
 

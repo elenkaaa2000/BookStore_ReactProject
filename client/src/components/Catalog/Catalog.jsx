@@ -1,6 +1,5 @@
 import BookCatalogItem from "../BookCatalogItem/BookCatalogItem";
 import { useFetchData } from "../../api/bookApi";
-import { Link } from "react-router";
 import { useState } from "react";
 
 export default function Catalog() {
@@ -20,7 +19,7 @@ export default function Catalog() {
 
     return (
         <section className="section catalog">
-            <h1>Каталог {category =='Всички' ? '' : ` - ${category}` }</h1>
+            <h1>Каталог {category && category !=='Всички' ? ` - ${category}` : "" }</h1>
             <nav>
                 <ul>
                     {categories.map(category =>

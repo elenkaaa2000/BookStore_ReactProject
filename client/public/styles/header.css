@@ -10,9 +10,9 @@
     color: black
 }
 
-.active {   
+.active {
     padding: 0.3em;
-       border-radius: 2em;
+    border-radius: 2em;
     border: 1px solid orange
 }
 
@@ -70,4 +70,19 @@
 .site-header .site-nav a:hover {
     color: rgb(230, 180, 100);
 
+}
+
+.site-header .search-field .search-result {
+    width: 500px;
+    border-radius: 0.5em;
+    box-shadow: 0 0 1em 0 rgb(0, 0, 0, 0.2);
+    padding: 2em;
+}
+
+.site-header .search-field .search-result ul li {
+    list-style: none;
+    text-align: center;
+}
+.site-header .search-field .search-result ul li a{
+    text-decoration: none;
 }

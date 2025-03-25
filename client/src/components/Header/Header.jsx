@@ -1,9 +1,22 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { Link, NavLink } from 'react-router'
 import { UserContext } from '../../context/UserContext'
 import useAuth from '../../hooks/useAuth'
+import { useFetchSearchData } from '../../api/bookApi';
 export default function Header() {
-    const {isAuthenticated} = useAuth()
+    const { isAuthenticated } = useAuth();
+    const { searchBook, searchResult } = useFetchSearchData();
+    const [isSearched, setIsSearched] = useState(false)
+
+    const searchAction = async (formData) => {
+        const data = Object.fromEntries(formData);
+
+        await searchBook(data.search);
+        setIsSearched(true)
+    }
+
+    console.log(isSearched);
+
     return (
         <>
             <header className="section site-header">
@@ -12,8 +25,18 @@ export default function Header() {
                         <Link to="/">BookStore</Link>
                     </div>
                     <div className="search-field">
-                        <input type="text" name="search" id="search" placeholder="Search..." />
-                        <button><i className="fa-solid fa-magnifying-glass"></i></button>
+                        <form action={searchAction}>
+                            <input type="text" name="search" id="search" placeholder="Search..." />
+                            <button><i className="fa-solid fa-magnifying-glass"></i></button>
+                        </form>
+                        {!isSearched ? null :
+                            (<div className="search-result">
+                                {searchResult.length > 0 ? (<ul>
+                                    {searchResult.map(b => (<li key={b._id}><Link to={`/book/${b._id}/details`}>{b.title}</Link></li>))}
+                                </ul>) : (<p>Няма съвпадение с търсенето</p>)}
+                            </div>)
+                        }
+
                     </div>
                     <nav>
                         <ul>
@@ -24,11 +47,11 @@ export default function Header() {
                                 </>)
                                 :
                                 (<>
-                                    
+
                                     <li><NavLink to="/profile" className={({ isActive }) => isActive ? "active" : ""}><i className="fa-solid fa-user"></i></NavLink></li>
                                     <li><NavLink to="/wishlist" className={({ isActive }) => isActive ? "active" : ""}><i className="fa-solid fa-heart"></i></NavLink></li>
                                     <li><NavLink to="/shopCart" className={({ isActive }) => isActive ? "active" : ""}><i className="fa-solid fa-cart-shopping"></i></NavLink></li>
-                                    
+
                                     <li><NavLink to="/logout" className={({ isActive }) => isActive ? "active" : ""}>Излез</NavLink></li>
                                 </>)}
                         </ul>
@@ -42,7 +65,7 @@ export default function Header() {
                         <li><NavLink to="/catalog" className={({ isActive }) => isActive ? "active" : ""}>Каталог</NavLink></li>
                         {isAuthenticated && (<li><NavLink to="/book/create" className={({ isActive }) => isActive ? "active" : ""}>Добави книга</NavLink></li>)}
 
-                        
+
                         <li><NavLink to="/contacts" className={({ isActive }) => isActive ? "active" : ""}>Контакти</NavLink></li>
                     </ul>
                 </nav>

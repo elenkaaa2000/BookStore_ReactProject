@@ -48,9 +48,8 @@ export default function BookDetails() {
         setShopBooks(initialShopState)
     }, [initialShopState]);
 
-    const isBought = shopBooks?.some(shopBook => shopBook.bookId === bookId);
-    console.log(isBought);
-
+    const isBought =shopBooks?.some(shopBook => shopBook.bookId === bookId);
+    
 
     const buyBookHandler = async () => {
         if (isBought) {
@@ -137,7 +136,9 @@ export default function BookDetails() {
                                     <button><Link to={`/book/${bookId}/edit`}>Редактирай</Link></button>
                                     <button onClick={deleteBookHandler}>Изтрий</button>
                                 </>)
+
                                 :
+
                                 (<>
                                     <button
                                         onClick={buyBookHandler}

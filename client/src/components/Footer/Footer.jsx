@@ -12,8 +12,7 @@ export default function Footer(){
             <div className="footer-nav">
                 <ul>
                     <li><Link to="/">Начална страница</Link></li>
-                    <li><Link to="/catalog">Каталог</Link></li>
-                    <li><Link to="/blog">Блог</Link></li>
+                    <li><Link to="/catalog">Каталог</Link></li>                    
                     <li><Link to="/contacts">Контакти</Link></li>
                 </ul>
             </div>

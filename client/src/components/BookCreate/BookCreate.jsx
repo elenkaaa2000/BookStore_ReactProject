@@ -9,7 +9,7 @@ export default function BookCreate({onCreate}) {
         const data = Object.fromEntries(formData);
          await create(data);  
 
-         navigate('/catalog')
+         navigate('/')
     }
 
 
