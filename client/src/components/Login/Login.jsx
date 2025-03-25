@@ -1,4 +1,4 @@
-import { useActionState, useContext } from "react"
+import { useActionState, useContext, useState } from "react"
 import { useLogin } from "../../api/userApi"
 import { useNavigate } from 'react-router'
 import { UserContext } from "../../context/UserContext";
@@ -8,17 +8,19 @@ export default function Login() {
     const { UserLoginHandler } = useContext(UserContext)
     const navigate = useNavigate();
 
+   
     const loginActionHandler = async (_, formData) => {
-        const values = Object.fromEntries(formData)
+        const values = Object.fromEntries(formData);
         const authData = await login(values.email, values.password);
         UserLoginHandler(authData);
 
-        navigate(-1)
+        navigate(-1);
     }
     const [_, loginAction, isPending] = useActionState(loginActionHandler, {
         email: '',
         password: ''
     })
+
     return (
         <section className="section login-page">
             <div className="image">
@@ -31,6 +33,7 @@ export default function Login() {
                     <div className="field">
                         <label htmlFor="email">Имейл</label>
                         <input type="text" name="email" id="email" />
+                    
                     </div>
 
                     <div className="field">

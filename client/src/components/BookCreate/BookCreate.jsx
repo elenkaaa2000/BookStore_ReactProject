@@ -1,16 +1,19 @@
 import { useNavigate } from 'react-router'
 import { useCreateBook } from "../../api/bookApi";
+import { useState } from 'react';
 
-export default function BookCreate({onCreate}) {
+export default function BookCreate({ onCreate }) {
     const navigate = useNavigate();
     const { create } = useCreateBook();
 
     const createAction = async (formData) => {
         const data = Object.fromEntries(formData);
-         await create(data);  
+      
+        await create(data);
 
-         navigate('/')
+        navigate('/')
     }
+
 
 
 

@@ -15,7 +15,6 @@ export default function Header() {
         setIsSearched(true)
     }
 
-    console.log(isSearched);
 
     return (
         <>
