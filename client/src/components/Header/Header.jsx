@@ -42,7 +42,7 @@ export default function Header() {
                         <li><NavLink to="/catalog" className={({ isActive }) => isActive ? "active" : ""}>Каталог</NavLink></li>
                         {isAuthenticated && (<li><NavLink to="/book/create" className={({ isActive }) => isActive ? "active" : ""}>Добави книга</NavLink></li>)}
 
-                        <li><NavLink to="/blog" className={({ isActive }) => isActive ? "active" : ""}>Блог</NavLink></li>
+                        
                         <li><NavLink to="/contacts" className={({ isActive }) => isActive ? "active" : ""}>Контакти</NavLink></li>
                     </ul>
                 </nav>

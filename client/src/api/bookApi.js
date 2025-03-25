@@ -4,16 +4,27 @@ import useAuth from "../hooks/useAuth";
 
 const baseUrl = `http://localhost:3030/data/books`;
 
-export const useFetchData = () => {
+export const useFetchData = (category) => {
     const [books, setBooks] = useState([]);
 
     useEffect(() => {
-        requester.get(baseUrl)
-            .then(setBooks)
-    }, []);
+        if (category == `Всички`) {
+            requester.get(baseUrl)
+                .then(setBooks)
+        } else {
+            const searchParams = new URLSearchParams({
+                where: `category="${category}"`
+            })
+            requester.get(`${baseUrl}?${searchParams.toString()}`)
+                .then(setBooks)
+        }
+
+
+    }, [category]);
 
     return {
-        books
+        books,
+        setBooks
     }
 }
 

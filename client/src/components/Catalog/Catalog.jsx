@@ -1,24 +1,35 @@
 import BookCatalogItem from "../BookCatalogItem/BookCatalogItem";
 import { useFetchData } from "../../api/bookApi";
-import { NavLink } from "react-router";
+import { Link } from "react-router";
+import { useState } from "react";
 
 export default function Catalog() {
-    const { books } = useFetchData();
+    const [category, setCategory] = useState('');
+    const categories = [
+        'Всички',       
+        'Детска литература',
+        'Художествена литература',
+        'Научна литература',
+        'Енциклопедии',
+        'История и политика',
+        'Електронни книги'
+    ];
+    
 
+    const { books } = useFetchData(category);
 
     return (
         <section className="section catalog">
-            <h1>Каталог</h1>
+            <h1>Каталог {category =='Всички' ? '' : ` - ${category}` }</h1>
             <nav>
                 <ul>
-                    <li><NavLink to="#" /*className={({ isActive }) => isActive ? "active" : ""}*/>Всички</NavLink></li>
-                    <li><NavLink to="#" /*className={({ isActive }) => isActive ? "active" : ""}*/>Детска литература</NavLink></li>
-                    <li><NavLink to="#" /*className={({ isActive }) => isActive ? "active" : ""}*/>Литература за тийнейджъри</NavLink></li>
-                    <li><NavLink to="#" /*className={({ isActive }) => isActive ? "active" : ""}*/>Художествена литература</NavLink></li>
-                    <li><NavLink to="#" /*className={({ isActive }) => isActive ? "active" : ""}*/>Научна литература</NavLink></li>
-                    <li><NavLink to="#" /*className={({ isActive }) => isActive ? "active" : ""}*/>Енциклопедии</NavLink></li>
-                    <li><NavLink to="#" /*className={({ isActive }) => isActive ? "active" : ""}*/>История и политика</NavLink></li>
-                    <li><NavLink to="#" /*className={({ isActive }) => isActive ? "active" : ""}*/>Електронни книги</NavLink></li>
+                    {categories.map(category =>
+                    (
+                        <li key={category}>
+                            <a onClick={() => setCategory(category)}>{category}</a>
+                        </li>
+                    )
+                    )}
                 </ul>
             </nav>
             {books.length > 0 ? (

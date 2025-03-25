@@ -49,13 +49,13 @@ export default function BookCreate({onCreate}) {
                     <label htmlFor="categoty">Категория</label>
                     <select name="category" id="categoty">
                         <option value="default">---</option>
-                        <option value="kids">Детска литература</option>
-                        <option value="teens">Литература за тийнейджъри</option>
-                        <option value="fiction">Художествена литература</option>
-                        <option value="science">Научна литература</option>
-                        <option value="encyclopedias">Енциклопедии</option>
-                        <option value="history-politics">История и политика</option>
-                        <option value="e-books">Електронни книги</option>
+                        <option value="Детска литература">Детска литература</option>
+                        <option value="Литература за тийнейджъри">Литература за тийнейджъри</option>
+                        <option value="Художествена литература">Художествена литература</option>
+                        <option value="Научна литература">Научна литература</option>
+                        <option value="Енциклопедии">Енциклопедии</option>
+                        <option value="История и политика">История и политика</option>
+                        <option value="Електронни книги">Електронни книги</option>
                     </select>
                 </div>
 
