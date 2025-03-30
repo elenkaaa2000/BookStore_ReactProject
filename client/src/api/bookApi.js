@@ -6,17 +6,25 @@ const baseUrl = `http://localhost:3030/data/books`;
 
 export const useFetchData = (category) => {
     const [books, setBooks] = useState([]);
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
+        setLoading(true)
         if (category == `Всички` || category == '') {
             requester.get(baseUrl)
-                .then(setBooks)
+                .then(result => {
+                    setBooks(result)
+                    setLoading(false)
+                })
         } else {
             const searchParams = new URLSearchParams({
                 where: `category="${category}"`
             })
             requester.get(`${baseUrl}?${searchParams.toString()}`)
-                .then(setBooks)
+                .then(result => {
+                    setBooks(result)
+                    setLoading(false)
+                })
         }
 
 
@@ -24,7 +32,8 @@ export const useFetchData = (category) => {
 
     return {
         books,
-        setBooks
+        setBooks,
+        loading
     }
 }
 
@@ -32,11 +41,11 @@ export const useFetchSearchData = () => {
     const [searchResult, setSearchResult] = useState([]);
 
     const searchBook = async (search) => {
-        if(search === "") {
+        if (search === "") {
             setSearchResult([]);
             return
         };
-        
+
         const searchParams = new URLSearchParams({
             where: `title LIKE "${search}"`
         });
@@ -52,8 +61,8 @@ export const useFetchSearchData = () => {
 
 export const useCreateBook = () => {
     const { options } = useAuth();
-    const create = (bookData) => {
-        requester.post(baseUrl, bookData, options)
+    const create = async (bookData) => {
+        await requester.post(baseUrl, bookData, options)
     }
 
     return {
@@ -81,16 +90,26 @@ export const useFetchBookDetails = (bookId) => {
     const [book, setBook] = useState({})
     useEffect(() => {
         requester.get(`${baseUrl}/${bookId}`)
-            .then(setBook)
+            .then(setBook);
     }, [bookId])
 
     return { book }
-}
+};
+
 
 export const useUpdateBook = () => {
     const { options } = useAuth()
-    const updateBook = (bookId, data) => {
-        requester.put(`${baseUrl}/${bookId}`, { ...data, _id: bookId }, options)
+    const updateBook = async (bookId, data) => {
+        try {
+            const response = await requester.put(`${baseUrl}/${bookId}`, { ...data, _id: bookId }, options);
+        } catch (error) {
+            if (error.message == 'Forbidden') {
+                throw new Error('Нямате права да редактирате тази книга');
+            }
+            throw new Error('Неуспешно редактиране на книга!')
+
+        }
+
     }
     return {
         updateBook
@@ -99,8 +118,12 @@ export const useUpdateBook = () => {
 
 export const useDeleteBook = () => {
     const { options } = useAuth()
-    const deleteBook = (bookId) => {
-        requester.delete(`${baseUrl}/${bookId}`, null, options)
+    const deleteBook = async (bookId) => {
+        try {
+            await requester.delete(`${baseUrl}/${bookId}`, null, options);
+        } catch (error) {
+            throw new Error("Неуспешно изтриване на книгата.");
+        }
     }
 
     return {

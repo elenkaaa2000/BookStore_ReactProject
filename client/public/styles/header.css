@@ -76,7 +76,7 @@
     width: 500px;
     border-radius: 0.5em;
     box-shadow: 0 0 1em 0 rgb(0, 0, 0, 0.2);
-    padding: 2em;
+    padding: 1em;
 }
 
 .site-header .search-field .search-result ul li {
@@ -85,4 +85,14 @@
 }
 .site-header .search-field .search-result ul li a{
     text-decoration: none;
+}
+.site-header .search-field .search-result{
+    position: relative;
+}
+.site-header .search-field .search-result button .close{
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0.4em;
+    color: red;
 }

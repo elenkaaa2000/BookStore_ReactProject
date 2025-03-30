@@ -1,21 +1,25 @@
 import { useNavigate } from 'react-router'
 import { useCreateBook } from "../../api/bookApi";
-import { useState } from 'react';
+import { toast } from 'react-toastify';
+
 
 export default function BookCreate({ onCreate }) {
     const navigate = useNavigate();
     const { create } = useCreateBook();
 
     const createAction = async (formData) => {
-        const data = Object.fromEntries(formData);
-      
-        await create(data);
+        const data = Object.fromEntries(formData);     
 
-        navigate('/')
+        try {
+            await create(data);
+            toast.success('Успешно добавихте нова книга!');
+            navigate('/') 
+        } catch (error) {
+            toast.error(error.message);
+            navigate('/logout')
+        }
+    
     }
-
-
-
 
     return (
         <section className="section create-book">

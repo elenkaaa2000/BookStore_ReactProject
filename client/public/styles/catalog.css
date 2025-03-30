@@ -74,11 +74,13 @@ h1.empty{
 
 .catalog nav ul li {
     display: block;
+   
 }
 
 
 .catalog nav ul li a {
     text-decoration: none;
+    
 
 }
 
@@ -92,5 +94,6 @@ h1.empty{
 
 .catalog nav a:hover {
     color: rgb(230, 180, 100);
+    cursor: pointer;
 
 }

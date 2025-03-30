@@ -6,6 +6,7 @@ import { UserContext } from "../../context/UserContext";
 import BookComments from "../BookComments/BookComments";
 import { useFetchAllLikedBooks, useLikeBook } from "../../api/likesApi";
 import { useBuyBook, useFetchShopCart } from "../../api/buyBookApi";
+import { toast } from "react-toastify";
 
 
 export default function BookDetails() {
@@ -15,13 +16,10 @@ export default function BookDetails() {
     const { deleteBook } = useDeleteBook();
     const { likeBook } = useLikeBook();
     const navigate = useNavigate();
-    const { buyBook } = useBuyBook()
+    const { buyBook } = useBuyBook();
 
-    const isOwner = userId === book._ownerId;
-    const title = book.title;
-    const imageUrl = book.imageUrl;
-    const author = book.author;
-    const price = book.price;
+    const isOwner = userId === book?._ownerId;
+    const { title, imageUrl, author, price } = book;
 
     //Like
     const { likedBooks: initialState } = useFetchAllLikedBooks(userId);
@@ -35,9 +33,15 @@ export default function BookDetails() {
 
     const likeBookHandler = async () => {
         if (isLiked) return;
-        await likeBook(bookId, title, imageUrl, author, price);
+        try {
+            await likeBook(bookId, title, imageUrl, author, price);
 
-        setLikedBooks([...likedBooks, { bookId }]);
+            setLikedBooks([...likedBooks, { bookId }]);
+            toast.success('Успешно харесахте книгата!')
+        } catch (error) {
+            toast.error('НЕУСПЕШНО харесахте книгата!')
+        }
+
     }
 
     //Buy
@@ -48,26 +52,40 @@ export default function BookDetails() {
         setShopBooks(initialShopState)
     }, [initialShopState]);
 
-    const isBought =shopBooks?.some(shopBook => shopBook.bookId === bookId);
-    
+    const isBought = shopBooks?.some(shopBook => shopBook.bookId === bookId);
+
 
     const buyBookHandler = async () => {
         if (isBought) {
             return
         }
-        await buyBook(bookId, title, imageUrl, price);
-        setShopBooks([...shopBooks, { bookId }])
+        try {
+            await buyBook(bookId, title, imageUrl, price);
+            setShopBooks([...shopBooks, { bookId }])
+            toast.success('Успешно добавихте книгата в количката!')
+        } catch (error) {
+            toast.error('НЕуспешно добавихте книгата в количката!')
+        }
+
 
     }
 
+
+
     //Delete Book
     const deleteBookHandler = async () => {
-        const hasConfirm = confirm('Are you sure?')
+        const hasConfirm = confirm('Сигурни ли сте, че искате да изтриете тази книга?')
         if (!hasConfirm) {
             return
         }
-        await deleteBook(bookId)
-        navigate('/catalog')
+        try {
+            await deleteBook(bookId);
+            toast.success('Успешно изтриване на книга!')
+            navigate('/catalog')
+        } catch (error) {
+            toast.error(error.message)
+        }
+
     }
 
     return (

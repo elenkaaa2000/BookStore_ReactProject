@@ -1,16 +1,26 @@
 import { useNavigate, useParams } from "react-router"
 import { useFetchBookDetails, useUpdateBook } from "../../api/bookApi";
+import { toast } from 'react-toastify'
+
 
 export default function BookEdit() {
     const { bookId } = useParams();
     const { book } = useFetchBookDetails(bookId);
-    const { updateBook} = useUpdateBook();
-    const navigate = useNavigate()
+    const { updateBook } = useUpdateBook();
+    const navigate = useNavigate();
 
     const formAction = async (formData) => {
-        const data = Object.fromEntries(formData);    
-        await updateBook(bookId, data)
-        navigate(`/book/${bookId}/details`)
+        const data = Object.fromEntries(formData);
+
+        try {
+            await updateBook(bookId, data);
+            toast.success('Успешно редактирахте книгата!')
+            navigate(`/book/${bookId}/details`)
+        } catch (error) {
+            
+            toast.error(error.message)
+        }
+
     }
 
     return (

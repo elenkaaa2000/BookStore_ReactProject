@@ -20,6 +20,10 @@ import GuestGuard from './guards/GuestGuard'
 import ShopCard from './components/ShopCart/ShopCart'
 import FinalizeShop from './components/ShopCart/FinalizeShop/FinalizeShop'
 
+import { ToastContainer } from 'react-toastify'
+
+
+
 function App() {
 
   return (
@@ -32,7 +36,7 @@ function App() {
             <Route path='/catalog' element={<Catalog />} />
             <Route path='/book/:bookId/details' element={<BookDetails />} />
             <Route element={<AuthGuard />}>
-              <Route path='/book/:bookId/edit' element={<BookEdit />} />
+
               <Route path='/book/create' element={<BookCreate />} />
               <Route path='/logout' element={<Logout />} />
               <Route path='/profile' element={<Profile />} />
@@ -40,6 +44,10 @@ function App() {
               <Route path='/shopCart' element={<ShopCard />} />
               <Route path='/shopCart/finalizeShop' element={<FinalizeShop />} />
             </Route>
+
+            <Route path="/book/:bookId/edit" element = {<BookEdit />}/>
+              
+          
 
             <Route element={<GuestGuard />}>
               <Route path='/login' element={<Login />} />
@@ -50,6 +58,8 @@ function App() {
           </Routes>
         </section>
         <Footer />
+        <ToastContainer />
+
       </div>
     </UserProvider >
   )

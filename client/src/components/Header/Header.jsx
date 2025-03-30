@@ -1,18 +1,29 @@
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import { Link, NavLink } from 'react-router'
-import { UserContext } from '../../context/UserContext'
 import useAuth from '../../hooks/useAuth'
 import { useFetchSearchData } from '../../api/bookApi';
+import { toast } from 'react-toastify'
+
 export default function Header() {
     const { isAuthenticated } = useAuth();
     const { searchBook, searchResult } = useFetchSearchData();
-    const [isSearched, setIsSearched] = useState(false)
+    const [isSearched, setIsSearched] = useState(false);
+
 
     const searchAction = async (formData) => {
         const data = Object.fromEntries(formData);
 
-        await searchBook(data.search);
-        setIsSearched(true)
+        try {
+            await searchBook(data.search);
+            setIsSearched(true)
+        } catch (error) {
+            toast.error(error.message)
+        }
+
+    }
+
+    const closeSearch = () => {
+        setIsSearched(false)
     }
 
 
@@ -30,6 +41,7 @@ export default function Header() {
                         </form>
                         {!isSearched ? null :
                             (<div className="search-result">
+                                <button onClick={closeSearch}><i className="close fa-solid fa-xmark"></i></button>
                                 {searchResult.length > 0 ? (<ul>
                                     {searchResult.map(b => (<li key={b._id}><Link to={`/book/${b._id}/details`}>{b.title}</Link></li>))}
                                 </ul>) : (<p>Няма съвпадение с търсенето</p>)}

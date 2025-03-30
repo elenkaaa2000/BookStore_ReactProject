@@ -1,5 +1,6 @@
 import { Link } from "react-router"
 import { useDislikeBook } from "../../../api/likesApi"
+import { toast } from "react-toastify";
 export default function WishlistItem({
     _id,
     bookId,
@@ -13,13 +14,20 @@ export default function WishlistItem({
     const { dislikeBook } = useDislikeBook();
 
     const dislikeBookClickHandler = async (_id) => {
-        const hasConfirm = confirm('Are you sure?')
+        const hasConfirm = confirm('Сигурни ли сте, че искате да премахнете книгата от списъка с харесвания!')
+
         if (!hasConfirm) {
             return
         }
- 
-       await dislikeBook(_id);
-       onEditList(_id);
+
+        try {
+            await dislikeBook(_id);
+            onEditList(_id);
+            toast.success('Успешно премахнахте книгата от списъка с харесвания!')
+        } catch (error) {
+            toast.error('НЕуспешно премахнахте книгата от списъка с харесвания!')
+        }
+       
     }
 
     return (

@@ -38,7 +38,7 @@ export const useLogout = () => {
         }
 
         requester.get(baseUrl + 'logout', null, options)
-            .then(UserLogoutHandler)
+            .finally(UserLogoutHandler)
     }, [accessToken, UserLogoutHandler])
 
     return {
@@ -52,20 +52,9 @@ export const useUserProfile = () => {
 
     useEffect(() => {
         requester.get(baseUrl + 'me', null, options)
-            .then(setProfile)
+        .then(setProfile);
     }, []);
 
-    return { profile, setProfile }
+    return { profile }
 }
 
-/*
-export const useEditProfile = () =>{
-    const {options} = useAuth()
-    const editProfile = async (data) =>{
-        const response = await requester.post(baseUrl+'me', {...data}, options);
-        return response
-    }
-
-    return {editProfile}
-}
-    */

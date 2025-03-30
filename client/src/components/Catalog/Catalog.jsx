@@ -1,11 +1,12 @@
 import BookCatalogItem from "../BookCatalogItem/BookCatalogItem";
 import { useFetchData } from "../../api/bookApi";
 import { useState } from "react";
+import Loader from "../Loader/Loader";
 
 export default function Catalog() {
     const [category, setCategory] = useState('');
     const categories = [
-        'Всички',       
+        'Всички',
         'Детска литература',
         'Художествена литература',
         'Научна литература',
@@ -13,13 +14,15 @@ export default function Catalog() {
         'История и политика',
         'Електронни книги'
     ];
-    
 
-    const { books } = useFetchData(category);
+
+    const { books, loading } = useFetchData(category);
+
+
 
     return (
         <section className="section catalog">
-            <h1>Каталог {category && category !=='Всички' ? ` - ${category}` : "" }</h1>
+            <h1>Каталог {category && category !== 'Всички' ? ` - ${category}` : ""}</h1>
             <nav>
                 <ul>
                     {categories.map(category =>
@@ -31,12 +34,15 @@ export default function Catalog() {
                     )}
                 </ul>
             </nav>
-            {books.length > 0 ? (
-                <section className="books">
-                    {books.map(book => <BookCatalogItem key={book._id} {...book} />)}
-                </section>)
-                :
-                (<h1 className="empty">Няма добавени книги</h1>)}
+            {loading && <Loader/>}
+            {
+                books.length > 0 ? (
+                    <section className="books">
+                        {books.map(book => <BookCatalogItem key={book._id} {...book} />)}
+                    </section>)
+                    :
+                    (<h1 className="empty">Няма добавени книги</h1>)
+            }
         </section>
     )
 }

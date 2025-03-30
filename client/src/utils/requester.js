@@ -1,28 +1,44 @@
 const request = async (method, url, data, options = {}) => {
-    if (method !== 'GET') {
-        options.method = method;
-    }
-
-    if (data) {
-        options = {
-            ...options,
-            headers: {
-                'Content-Type': 'application/json',
-                ...options.headers,
-            },
-            body: JSON.stringify(data),
+    try {
+        if (method !== 'GET') {
+            options.method = method;
         }
+
+        if (data) {
+            options = {
+                ...options,
+                headers: {
+                    'Content-Type': 'application/json',
+                    ...options.headers,
+                },
+                body: JSON.stringify(data),
+            }
+        }
+
+        const response = await fetch(url, options);
+        const responseContentType = response.headers.get('Content-Type');
+        if (!responseContentType) {
+            throw new Error("No Content-Type in response.");
+        }
+
+        let result;
+        if (responseContentType.includes('application/json')) {
+            result = await response.json();
+        } else {
+            result = await response.text();
+        }
+
+        if (!response.ok) {
+            throw new Error(result.message || `HTTP error! Status: ${response.status}`);
+            
+        }
+
+        return result
+
+
+    } catch (error) {
+        throw error
     }
-
-    const response = await fetch(url, options);
-    const responseContentType = response.headers.get('Content-Type');
-    if (!responseContentType) {
-        return;
-    }
-
-    const result = await response.json();
-
-    return result;
 
 };
 

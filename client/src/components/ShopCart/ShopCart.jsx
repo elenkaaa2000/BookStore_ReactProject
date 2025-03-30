@@ -1,7 +1,8 @@
 import { useContext } from "react";
 import { useDeleteShopBook, useFetchShopCart } from "../../api/buyBookApi"
 import { UserContext } from "../../context/UserContext";
-import { Link, useNavigate } from 'react-router'
+import { Link, useNavigate } from 'react-router';
+import {toast} from 'react-toastify'
 
 export default function ShopCard() {
     const { _id: userId } = useContext(UserContext)
@@ -10,13 +11,19 @@ export default function ShopCard() {
     const navigate = useNavigate()
 
     const removeBook = async (_id) => {
-        const hasConfirm = confirm('Are you sure?')
+        const hasConfirm = confirm('Сигурни ли сте, че искате да премахнете книгата от количката!')
         if (!hasConfirm) {
             return
         }
 
-        await deleteBook(_id)
-        setBooks(state => state.filter(state => state._id !== _id))
+        try {
+            await deleteBook(_id)
+            setBooks(state => state.filter(state => state._id !== _id))
+            toast.success('Успешно премахнахте книгата от количката!')
+        } catch (error) {
+            toast.error('НЕуспешно премахнахте книгата от количката!')
+        }
+     
     }
 
     let total = 0;
@@ -58,10 +65,10 @@ export default function ShopCard() {
                         <p>Обща сума: {total} лв. </p>
                     </div>
                 </div>
-                <button 
-                onClick={finalizeShopHandler}
-                disabled = {books.length ==0}
-                className={books.length ==0 ? 'finish disabled-btn' :'finish' }
+                <button
+                    onClick={finalizeShopHandler}
+                    disabled={books.length == 0}
+                    className={books.length == 0 ? 'finish disabled-btn' : 'finish'}
                 >Завърши поръчката</button>
             </section>
         </>

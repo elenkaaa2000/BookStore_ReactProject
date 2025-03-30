@@ -2,6 +2,7 @@ import { useActionState, useContext } from 'react'
 import { useNavigate } from 'react-router'
 import { useRegister } from '../../api/userApi';
 import { UserContext } from '../../context/UserContext';
+import { toast } from 'react-toastify'
 
 export default function Register() {
     const { register } = useRegister();
@@ -12,13 +13,27 @@ export default function Register() {
         const values = Object.fromEntries(formData);
 
         if (values.password !== values.rePassword) {
-            console.log('Passwords missmatch!');
+            toast.error('Паролите не съвпадат!')
             return
         }
 
-        const authData = await register(values.email, values.username, values.name, values.address, values.password)
-        UserLoginHandler(authData);
-        navigate('/')
+        try {
+            const authData = await register(values.email, values.username, values.name, values.address, values.password)
+            UserLoginHandler(authData);
+            toast.success('Успешно се регистрирахте!')
+            navigate('/')
+        } catch (error) {
+
+            if (error.message === 'Login or password don\'t match') {
+                toast.error('Имейл или парола не съвпадат!')
+            } else if (error.message === "Missing fields") {
+                toast.error('Всички полета са задължителни!')
+            } else if (error.message === "A user with the same email already exists") {
+                toast.error('Потребител с този имейл вече съществува!')
+            }else{
+                toast.error(error.message)
+            }
+        }
     }
     const [_, registerAction, isPending] = useActionState(registerActionHandler, {
         username: '',

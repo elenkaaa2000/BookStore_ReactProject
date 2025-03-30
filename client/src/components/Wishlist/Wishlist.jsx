@@ -9,7 +9,7 @@ export default function Wishlist() {
     const { _id: userId } = useContext(UserContext);
     const { likedBooks, setLikedBooks } = useFetchAllLikedBooks(userId);
 
-    const editListHandler = (removeBookId) => {
+    const editListHandler = (removeBookId) => {        
         setLikedBooks(prevBooks => prevBooks.filter(prevBooks => prevBooks._id !== removeBookId))
     }
 
