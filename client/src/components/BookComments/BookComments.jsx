@@ -1,11 +1,12 @@
 import { useContext } from "react";
+import { Link } from "react-router";
 import { useCreateComment, useFetchBookComments } from "../../api/commentsApi"
 import CreateBookComment from "./CreateBookComment"
 import { UserContext } from "../../context/UserContext";
 import BookCommentItem from "./BookCommentItem";
 import useAuth from "../../hooks/useAuth";
 import Loader from "../Loader/Loader";
-import {toast} from 'react-toastify'
+import { toast } from 'react-toastify'
 
 export default function BookComments({
     bookId
@@ -34,6 +35,7 @@ export default function BookComments({
                 {loading ? (<Loader />) :
                     comments.length > 0 ? comments.map(c => <BookCommentItem key={c._id} {...c} />) : (<h1>Все още няма добавени коментари към книгата.</h1>)}
 
+                {!isAuthenticated && (<h1>За да добавите коментар е необходимо да <Link to="/login">влезете в своя профил</Link>.</h1>)}
             </section>
             {isAuthenticated && <CreateBookComment bookId={bookId} onComment={createCommentHandler} />}
 

@@ -39,23 +39,26 @@ export const useFetchData = (category) => {
 
 export const useFetchSearchData = () => {
     const [searchResult, setSearchResult] = useState([]);
+    const [loading,setLoading] = useState(false)
 
     const searchBook = async (search) => {
         if (search === "") {
             setSearchResult([]);
             return
         };
-
+setLoading(true)
         const searchParams = new URLSearchParams({
             where: `title LIKE "${search}"`
         });
 
         const response = await requester.get(`${baseUrl}?${searchParams.toString()}`)
         setSearchResult(response)
+        setLoading(false)
     }
     return {
         searchBook,
-        searchResult
+        searchResult,
+        loading
     }
 }
 

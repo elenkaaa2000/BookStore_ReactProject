@@ -8,7 +8,8 @@ import { toast } from 'react-toastify';
 export default function BookCreate() {
     const navigate = useNavigate();
     const { create } = useCreateBook();
-    const { register, handleSubmit, formState: { errors, isValid } } = useForm({ mode: 'onChange' })
+
+    const { register, handleSubmit, formState: { errors, isValid } } = useForm({ mode: 'onChange' });
 
     const createAction = async (_, formData) => {
         const data = Object.fromEntries(formData);
@@ -83,13 +84,17 @@ export default function BookCreate() {
                 <div className="field">
                     <label htmlFor="isbn">ISBN</label>
                     <input type="number" name="isbn" id="isbn"
-                    {...register('isbn', {
-                        required: 'Полето е задължително!',
-                        min: {
-                            value: 0,
-                            message: 'Полето трябва да бъде с положителна стойност!'
-                        }
-                    })}
+                        {...register('isbn', {
+                            required: 'Полето е задължително!',
+                            min: {
+                                value: 0,
+                                message: 'Полето трябва да бъде с положителна стойност!'
+                            },
+                            pattern: {
+                                value: /[0-9]/i,
+                                message: "Полето трябва да съдържа само числа!"
+                            }
+                        })}
                     />
                     {errors.isbn && <p className='validationError'>{errors.isbn.message}</p>}
                 </div>
@@ -111,27 +116,27 @@ export default function BookCreate() {
                 <div className="field">
                     <label htmlFor="imageUrl">Корица</label>
                     <input type="text" name="imageUrl" id="imageUrl"
-                     {...register("imageUrl", {
-                        required: "Полето е задължително",
-                        pattern: {
-                            value: /^(https?:\/\/.*\.(?:jpg|jpeg|png|gif|bmp|svg))$/i,
-                            message: "Невалиден URL за изображение"
-                        }
-                    })} 
+                        {...register("imageUrl", {
+                            required: "Полето е задължително",
+                            pattern: {
+                                value: /^(https?:\/\/.*\.(?:jpg|jpeg|png|gif|bmp|svg))$/i,
+                                message: "Невалиден URL за изображение"
+                            }
+                        })}
                     />
                     {errors.imageUrl && <p className='validationError'>{errors.imageUrl.message}</p>}
                 </div>
 
                 <div className="field">
                     <label htmlFor="pages">Брой страници</label>
-                    <input type="number" name="pages" id="pages" 
-                    {...register('pages', {
-                        required: "Полето е задължително",
-                        min: {
-                            value: 0,
-                            message: 'Полето трябва да бъде с положителна стойност!'
-                        }
-                    })}
+                    <input type="number" name="pages" id="pages"
+                        {...register('pages', {
+                            required: "Полето е задължително",
+                            min: {
+                                value: 0,
+                                message: 'Полето трябва да бъде с положителна стойност!'
+                            }
+                        })}
                     />
                     {errors.pages && <p className='validationError'>{errors.pages.message}</p>}
                 </div>
@@ -139,18 +144,18 @@ export default function BookCreate() {
                 <div className="field">
                     <label htmlFor="language">Език</label>
                     <input type="language" name="language" id="language"
-                    {...register('language', {
-                        required:"Полето е задължително",
-                    })} />
+                        {...register('language', {
+                            required: "Полето е задължително",
+                        })} />
                     {errors.language && <p className='validationError'>{errors.language.message}</p>}
                 </div>
 
                 <div className="field">
                     <label htmlFor="translator">Преводач</label>
                     <input type="text" name="translator" id="translator"
-                    {...register('translator', {
-                        required:"Полето е задължително",
-                    })}
+                        {...register('translator', {
+                            required: "Полето е задължително",
+                        })}
                     />
                     {errors.translator && <p className='validationError'>{errors.translator.message}</p>}
                 </div>
@@ -158,13 +163,13 @@ export default function BookCreate() {
                 <div className="field">
                     <label htmlFor="price">Цена</label>
                     <input type="number" name="price" id="price"
-                    {...register('price', {
-                        required: "Полето е задължително",
-                        min: {
-                            value: 0,
-                            message: 'Полето трябва да бъде с положителна стойност!'
-                        }
-                    })}
+                        {...register('price', {
+                            required: "Полето е задължително",
+                            min: {
+                                value: 0,
+                                message: 'Полето трябва да бъде с положителна стойност!'
+                            }
+                        })}
                     />
                     {errors.price && <p className='validationError'>{errors.price.message}</p>}
                 </div>
@@ -172,19 +177,19 @@ export default function BookCreate() {
                 <div className="field-description">
                     <label htmlFor="description">Описание</label>
                     <textarea name="description" id="description"
-                   {...register('description', {
-                    required: "Полето е задължително",
-                    minLength: {
-                        value: 5,
-                        message: 'Полето трябва да бъде поне 5 символа!'
-                    },
-                    
-                })}
+                        {...register('description', {
+                            required: "Полето е задължително",
+                            minLength: {
+                                value: 5,
+                                message: 'Полето трябва да бъде поне 5 символа!'
+                            },
+
+                        })}
                     />
                     {errors.description && <p className='validationError'>{errors.description.message}</p>}
                 </div>
 
-                <input type="submit" value="Добави"/>
+                <input type="submit" value="Добави" disabled={!isValid} />
             </form>
 
         </section>
