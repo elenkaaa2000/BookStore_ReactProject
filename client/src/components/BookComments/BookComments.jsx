@@ -5,6 +5,7 @@ import { UserContext } from "../../context/UserContext";
 import BookCommentItem from "./BookCommentItem";
 import useAuth from "../../hooks/useAuth";
 import Loader from "../Loader/Loader";
+import {toast} from 'react-toastify'
 
 export default function BookComments({
     bookId
@@ -15,8 +16,14 @@ export default function BookComments({
     const { isAuthenticated } = useAuth()
 
     const createCommentHandler = async (commentData) => {
-        const newComment = await createComment(bookId, commentData, name);
-        setComments(state => [...state, newComment])
+        try {
+            const newComment = await createComment(bookId, commentData, name);
+            setComments(state => [...state, newComment]);
+            toast.success('Успешно добавихте коментар към книгата!')
+        } catch (error) {
+            toast.error('Неуспешно добавихте коментар към книгата!')
+        }
+
     }
 
 

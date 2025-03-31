@@ -48,13 +48,18 @@ export const useLogout = () => {
 
 export const useUserProfile = () => {
     const [profile, setProfile] = useState([]);
-    const { options } = useAuth()
+    const { options } = useAuth();
+    const [loading,setLoading] = useState(false)
 
     useEffect(() => {
+        setLoading(true)
         requester.get(baseUrl + 'me', null, options)
-        .then(setProfile);
+        .then(res=>{
+            setProfile(res);
+            setLoading(false)
+        });
     }, []);
 
-    return { profile }
+    return { profile,loading }
 }
 
