@@ -18,17 +18,21 @@ export const useLikeBook = () => {
 
 export const useFetchAllLikedBooks = (userId) => {
     const [likedBooks, setLikedBooks] = useState([]);
-
+const [loading, setLoading] = useState(false)
     useEffect(() => {
+        setLoading(true)
         const searchParams = new URLSearchParams({
             where: `_ownerId="${userId}"`
         })
 
         requester.get(`${baseUrl}?${searchParams.toString()}`)
-            .then(setLikedBooks)
+            .then(result=>{
+                setLikedBooks(result);
+                setLoading(false)
+            })
     }, [userId])
 
-    return { likedBooks, setLikedBooks }
+    return { likedBooks, setLikedBooks, loading }
 }
 
 export const useDislikeBook = () => {

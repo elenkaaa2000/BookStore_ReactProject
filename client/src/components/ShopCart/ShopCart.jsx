@@ -3,10 +3,11 @@ import { useDeleteShopBook, useFetchShopCart } from "../../api/buyBookApi"
 import { UserContext } from "../../context/UserContext";
 import { Link, useNavigate } from 'react-router';
 import {toast} from 'react-toastify'
+import Loader from "../Loader/Loader";
 
 export default function ShopCard() {
     const { _id: userId } = useContext(UserContext)
-    const { books, setBooks } = useFetchShopCart(userId);
+    const { books, setBooks, loading } = useFetchShopCart(userId);
     const { deleteBook } = useDeleteShopBook();
     const navigate = useNavigate()
 
@@ -43,21 +44,21 @@ export default function ShopCard() {
                 <h1>Количка</h1>
                 <div className="wrapper">
                     <div className="books">
-                        {books.length > 0 ? books.map(b =>
-                        (<div className="book" key={b._id}>
-                            <div className="description">
-                                <img src={b.imageUrl} alt="" />
-                                <h3>{b.title}</h3>
-                            </div>
-                            <div className="price">
-                                <p>Цена: {b.price} лв.</p>
-                            </div>
-                            <div className="buttons">
-                                <button><Link to={`/book/${b.bookId}/details`}>Детайли</Link></button>
-                                <button onClick={() => removeBook(b._id)}>Изтрий</button>
-                            </div>
-                        </div>)) : (<h2>Няма добавени книги в количката</h2>)}
-
+                        {loading ? (<Loader/>) : 
+                        books.length > 0 ? books.map(b =>
+                            (<div className="book" key={b._id}>
+                                <div className="description">
+                                    <img src={b.imageUrl} alt="" />
+                                    <h3>{b.title}</h3>
+                                </div>
+                                <div className="price">
+                                    <p>Цена: {b.price} лв.</p>
+                                </div>
+                                <div className="buttons">
+                                    <button><Link to={`/book/${b.bookId}/details`}>Детайли</Link></button>
+                                    <button onClick={() => removeBook(b._id)}>Изтрий</button>
+                                </div>
+                            </div>)) : (<h2>Няма добавени книги в количката</h2>)}  
 
                     </div>
 

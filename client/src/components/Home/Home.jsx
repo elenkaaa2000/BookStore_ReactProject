@@ -1,10 +1,12 @@
 import styles from './Home.module.css'
 
 import BookCatalogItem from "../BookCatalogItem/BookCatalogItem";
+import Loader from '../Loader/Loader';
 import { useFetchLatestBooks } from "../../api/bookApi";
 
+
 export default function Home() {
-    const { books } = useFetchLatestBooks()
+    const { books,loading } = useFetchLatestBooks()
     return (
         <section className="section site-home">
             <section className="banner">
@@ -12,7 +14,9 @@ export default function Home() {
                 <h3>Светът на хубавите книги — Открий исторически и съвременни сюжети, романи, разкази, трилъри и още книги за ценители.</h3>
             </section>
             <section className="featured-books">
-                {books.length > 0 ? books.map(book => <BookCatalogItem key={book._id} {...book} />) : (<h1 className="empty">Няма наскоро добавени книги</h1>)}
+                {loading ? (<Loader/>) :
+                 books.length > 0 ? books.map(book => <BookCatalogItem key={book._id} {...book} />) : (<h1 className="empty">Няма наскоро добавени книги</h1>) }
+               
 
             </section>
         </section>

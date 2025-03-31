@@ -19,19 +19,25 @@ export const useCreateComment = () => {
 
 export const useFetchBookComments = (bookId) => {
     const [comments, setComments] = useState([]);
+    const [loading,setLoading] = useState(false)
 
     useEffect(() => {
+        setLoading(true)
         const searchParams = new URLSearchParams({
             where: `bookId="${bookId}"`
         });
 
         requester.get(`${baseUrl}?${searchParams.toString()}`)
-            .then(setComments)
+            .then(result=>{
+                setComments(result)
+                setLoading(false)
+            })
     }, [bookId]);
 
     return {
         comments,
-        setComments
+        setComments,
+        loading
     }
 }
 

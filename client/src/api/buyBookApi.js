@@ -6,17 +6,22 @@ const baseUrl = 'http://localhost:3030/data/buy'
 
 export const useFetchShopCart = (userId) => {
     const [books, setBooks] = useState([]);
+    const [loading,setLoading] = useState(false);
 
     useEffect(() => {
+        setLoading(true)
         const searchParams = new URLSearchParams({
             where: `_ownerId="${userId}"`
         });
 
         requester.get(`${baseUrl}?${searchParams.toString()}`)
-            .then(setBooks)
+            .then(res=>{
+                setBooks(res);
+                setLoading(false)
+            })
     }, [userId])
 
-    return { books, setBooks }
+    return { books, setBooks,loading }
 }
 
 export const useBuyBook = () => {

@@ -71,29 +71,40 @@ export const useCreateBook = () => {
 }
 
 export const useFetchLatestBooks = () => {
-    const [books, setBooks] = useState([])
+    const [books, setBooks] = useState([]);
+    const [loading, setLoading] = useState(false)
     useEffect(() => {
+        setLoading(true)
         const searchParams = new URLSearchParams({
             sortBy: '_createdOn desc',
             pageSize: 3
         });
 
         requester.get(`${baseUrl}?${searchParams.toString()}`)
-            .then(setBooks)
+            .then(result => {
+                setBooks(result);
+                setLoading(false)
+            })
     }, []);
     return {
-        books
+        books,
+        loading
     }
 }
 
 export const useFetchBookDetails = (bookId) => {
-    const [book, setBook] = useState({})
+    const [book, setBook] = useState({});
+    const [loading, setLoading] = useState(false)
     useEffect(() => {
+        setLoading(true)
         requester.get(`${baseUrl}/${bookId}`)
-            .then(setBook);
+            .then(result=>{
+                setBook(result);
+                setLoading(false)
+            });
     }, [bookId])
 
-    return { book }
+    return { book,loading }
 };
 
 

@@ -34,15 +34,18 @@ export default function Catalog() {
                     )}
                 </ul>
             </nav>
-            {loading && <Loader/>}
-            {
+            {loading ? (<Loader/>) : (
+
                 books.length > 0 ? (
                     <section className="books">
                         {books.map(book => <BookCatalogItem key={book._id} {...book} />)}
+
                     </section>)
                     :
                     (<h1 className="empty">Няма добавени книги</h1>)
-            }
+
+            )}
+
         </section>
     )
 }
