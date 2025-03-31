@@ -20,7 +20,7 @@ import GuestGuard from './guards/GuestGuard'
 import ShopCard from './components/ShopCart/ShopCart'
 import FinalizeShop from './components/ShopCart/FinalizeShop/FinalizeShop'
 
-import { ToastContainer } from 'react-toastify'
+import { ToastContainer, Zoom } from 'react-toastify'
 
 
 
@@ -58,7 +58,18 @@ function App() {
           </Routes>
         </section>
         <Footer />
-        <ToastContainer />
+        <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+        transition={Zoom} />
 
       </div>
     </UserProvider >

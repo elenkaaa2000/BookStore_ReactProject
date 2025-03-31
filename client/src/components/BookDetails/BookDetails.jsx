@@ -38,9 +38,9 @@ export default function BookDetails() {
             await likeBook(bookId, title, imageUrl, author, price);
 
             setLikedBooks([...likedBooks, { bookId }]);
-            toast.success('Успешно харесахте книгата!')
+            toast.success('Успешно добавихте книгата в списъка с харесани книги!')
         } catch (error) {
-            toast.error('НЕУСПЕШНО харесахте книгата!')
+            toast.error('НЕУСПЕШНО добавихте книгата в списъка с харесани книги!')
         }
 
     }
@@ -75,19 +75,20 @@ export default function BookDetails() {
 
     //Delete Book
     const deleteBookHandler = async () => {
-        const hasConfirm = confirm('Сигурни ли сте, че искате да изтриете тази книга?')
-        if (!hasConfirm) {
-            return
-        }
-        try {
-            await deleteBook(bookId);
-            toast.success('Успешно изтриване на книга!')
-            navigate('/catalog')
-        } catch (error) {
-            toast.error(error.message)
-        }
-
-    }
+         const hasConfirm = confirm('Сигурни ли сте, че искате да изтриете тази книга?')
+         if (!hasConfirm) {
+             return
+         }
+         try {
+             await deleteBook(bookId);
+             toast.success('Успешно изтриване на книга!')
+             navigate('/catalog')
+         } catch (error) {
+             toast.error(error.message)
+         }
+ 
+     }   
+    
 
     return (
         <section className="section book-details">
