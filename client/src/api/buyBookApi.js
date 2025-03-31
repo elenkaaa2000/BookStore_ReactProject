@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useId, useState } from "react"
 import useAuth from "../hooks/useAuth";
 import requester from "../utils/requester";
 
@@ -9,6 +9,10 @@ export const useFetchShopCart = (userId) => {
     const [loading,setLoading] = useState(false);
 
     useEffect(() => {
+        if(!userId){
+            setLoading(true);
+            return
+        }
         setLoading(true)
         const searchParams = new URLSearchParams({
             where: `_ownerId="${userId}"`
@@ -42,3 +46,4 @@ export const useDeleteShopBook = () => {
 
     return{deleteBook}
 }
+

@@ -46,6 +46,7 @@
     margin: 0 auto;
 }
 
+
 .login-form .field input {
     transition: all 0.3s ease-in-out;
     border: 2px solid #ccc;

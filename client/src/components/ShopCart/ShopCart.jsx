@@ -34,7 +34,7 @@ export default function ShopCard() {
 
     })
 
-    const finalizeShopHandler = () => {
+    const finalizeShopHandler = () => {      
         navigate('/shopCart/finalizeShop')
     }
 
