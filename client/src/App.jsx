@@ -23,7 +23,6 @@ import FinalizeShop from './components/ShopCart/FinalizeShop/FinalizeShop'
 import { ToastContainer, Zoom } from 'react-toastify'
 
 
-
 function App() {
 
   return (

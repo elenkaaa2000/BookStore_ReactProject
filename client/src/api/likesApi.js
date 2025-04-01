@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import useAuth from "../hooks/useAuth"
 import requester from "../utils/requester"
 
-const baseUrl = 'http://localhost:3030/data/likes'
+const baseUrl = `${import.meta.env.VITE_APP_SERVER_URL}/data/likes`
 
 export const useLikeBook = () => {
     const { options } = useAuth()

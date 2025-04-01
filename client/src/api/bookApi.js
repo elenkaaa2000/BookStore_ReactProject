@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import requester from "../utils/requester";
 import useAuth from "../hooks/useAuth";
 
-const baseUrl = `http://localhost:3030/data/books`;
+const baseUrl = `${import.meta.env.VITE_APP_SERVER_URL}/data/books`;
 
 export const useFetchData = (category) => {
     const [books, setBooks] = useState([]);

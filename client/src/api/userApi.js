@@ -3,7 +3,7 @@ import requester from "../utils/requester"
 import useAuth from "../hooks/useAuth"
 import { UserContext } from "../context/UserContext"
 
-const baseUrl = `http://localhost:3030/users/`
+const baseUrl = `${import.meta.env.VITE_APP_SERVER_URL}/users/`
 export const useLogin = () => {
     const login = async (email, password) => {
         return requester.post(baseUrl + 'login', { email, password })

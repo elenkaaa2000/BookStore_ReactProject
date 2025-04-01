@@ -2,7 +2,7 @@ import { useEffect, useId, useState } from "react"
 import useAuth from "../hooks/useAuth";
 import requester from "../utils/requester";
 
-const baseUrl = 'http://localhost:3030/data/buy'
+const baseUrl = `${import.meta.env.VITE_APP_SERVER_URL}/data/buy`
 
 export const useFetchShopCart = (userId) => {
     const [books, setBooks] = useState([]);
