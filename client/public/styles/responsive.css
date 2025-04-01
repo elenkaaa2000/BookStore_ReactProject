@@ -75,6 +75,7 @@
 
     .login-page .image img{
         max-width: 300px;
+        display: none;
     }
 
     .login-page .login-form-container{
