@@ -6,10 +6,10 @@ const baseUrl = 'http://localhost:3030/data/buy'
 
 export const useFetchShopCart = (userId) => {
     const [books, setBooks] = useState([]);
-    const [loading,setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        if(!userId){
+        if (!userId) {
             setLoading(true);
             return
         }
@@ -19,13 +19,13 @@ export const useFetchShopCart = (userId) => {
         });
 
         requester.get(`${baseUrl}?${searchParams.toString()}`)
-            .then(res=>{
+            .then(res => {
                 setBooks(res);
                 setLoading(false)
             })
     }, [userId])
 
-    return { books, setBooks,loading }
+    return { books, setBooks, loading }
 }
 
 export const useBuyBook = () => {
@@ -44,6 +44,16 @@ export const useDeleteShopBook = () => {
         return response
     }
 
-    return{deleteBook}
+    return { deleteBook }
 }
 
+export const useDeleteAllShopBooks = () => {
+    const { options } = useAuth()
+    const deleteAllBooks = async (books) => {
+        await Promise.all(books.map(book => {
+            requester.delete(`${baseUrl}/${book._id}`, null, options)
+        }))
+    }
+
+    return { deleteAllBooks }
+}

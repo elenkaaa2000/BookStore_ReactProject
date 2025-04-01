@@ -1,15 +1,16 @@
 import { useContext } from "react";
-import { useDeleteShopBook, useFetchShopCart } from "../../api/buyBookApi"
+import { useDeleteAllShopBooks, useDeleteShopBook, useFetchShopCart } from "../../api/buyBookApi"
 import { UserContext } from "../../context/UserContext";
 import { Link, useNavigate } from 'react-router';
-import {toast} from 'react-toastify'
+import { toast } from 'react-toastify'
 import Loader from "../Loader/Loader";
 
 export default function ShopCard() {
     const { _id: userId } = useContext(UserContext)
     const { books, setBooks, loading } = useFetchShopCart(userId);
     const { deleteBook } = useDeleteShopBook();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const { deleteAllBooks } = useDeleteAllShopBooks();
 
     const removeBook = async (_id) => {
         const hasConfirm = confirm('Сигурни ли сте, че искате да премахнете книгата от количката!')
@@ -24,7 +25,7 @@ export default function ShopCard() {
         } catch (error) {
             toast.error('НЕуспешно премахнахте книгата от количката!')
         }
-     
+
     }
 
     let total = 0;
@@ -34,8 +35,14 @@ export default function ShopCard() {
 
     })
 
-    const finalizeShopHandler = () => {      
-        navigate('/shopCart/finalizeShop')
+    const finalizeShopHandler = () => {
+        try {
+            deleteAllBooks(books);
+            toast.success('Успешно направена поръчка');
+            navigate('/shopCart/finalizeShop')
+        } catch (error) {
+            toast.error(error.message)
+        }
     }
 
     return (
@@ -44,8 +51,8 @@ export default function ShopCard() {
                 <h1>Количка</h1>
                 <div className="wrapper">
                     <div className="books">
-                        {loading ? (<Loader/>) : 
-                        books.length > 0 ? books.map(b =>
+                        {loading ? (<Loader />) :
+                            books.length > 0 ? books.map(b =>
                             (<div className="book" key={b._id}>
                                 <div className="description">
                                     <img src={b.imageUrl} alt="" />
@@ -58,7 +65,7 @@ export default function ShopCard() {
                                     <button><Link to={`/book/${b.bookId}/details`}>Детайли</Link></button>
                                     <button onClick={() => removeBook(b._id)}>Изтрий</button>
                                 </div>
-                            </div>)) : (<h2>Няма добавени книги в количката</h2>)}  
+                            </div>)) : (<h2>Няма добавени книги в количката</h2>)}
 
                     </div>
 
