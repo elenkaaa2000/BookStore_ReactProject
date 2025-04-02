@@ -21,6 +21,7 @@ import ShopCard from './components/ShopCart/ShopCart'
 import FinalizeShop from './components/ShopCart/FinalizeShop/FinalizeShop'
 
 import { ToastContainer, Zoom } from 'react-toastify'
+import ErrorPage from './components/404Page/404Page'
 
 
 function App() {
@@ -54,6 +55,7 @@ function App() {
             </Route>
 
             <Route path='/contacts' element={<Contacts />} />
+            <Route path='*' element={<ErrorPage/>}/>
           </Routes>
         </section>
         <Footer />

@@ -20,7 +20,7 @@
 
 @import url("./responsive.css");
 @import url("./loader.css");
-
+@import url("./404Page.css");
 * {
     margin: 0;
     padding: 0;

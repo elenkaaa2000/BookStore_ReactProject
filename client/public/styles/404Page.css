@@ -1,0 +1,30 @@
+.text{
+    text-align: center;
+    font-size: 3rem;
+    color: orange;
+}
+
+.btn{
+    display: block;
+    margin: 0 auto;
+    padding: 1em 1.5em;
+    border-radius: 0.5em;
+    background-color: rgb(241, 199, 122);
+    border: none;
+    cursor: pointer;
+}
+
+.btn a{
+    text-decoration: none;
+    color: #666;
+}
+
+.btn:hover{
+    display: block;
+    margin: 0 auto;
+    padding: 1em 1.5em;
+    border-radius: 0.5em;
+    background-color: orange;
+    border: none;
+    cursor: pointer;
+}

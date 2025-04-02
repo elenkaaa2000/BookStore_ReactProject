@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import requester from "../utils/requester";
 import useAuth from "../hooks/useAuth";
+import { useNavigate } from "react-router";
 
 const baseUrl = `${import.meta.env.VITE_APP_SERVER_URL}/data/books`;
 
@@ -97,15 +98,20 @@ export const useFetchLatestBooks = () => {
 
 export const useFetchBookDetails = (bookId) => {
     const [book, setBook] = useState({});
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate()
     useEffect(() => {
         setLoading(true)
         requester.get(`${baseUrl}/${bookId}`)
             .then(result => {
                 setBook(result);
                 setLoading(false)
-            });
-    }, [bookId])
+            })
+            .catch(error => {
+                setLoading(false);
+                navigate("*"); 
+            })
+    }, [bookId, navigate])
 
     return { book, loading }
 };
