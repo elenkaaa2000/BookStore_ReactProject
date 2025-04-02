@@ -102,4 +102,23 @@
         flex-direction: column;
         gap:2em
     }
+
+    .shop-cart {
+        max-width: 480px;
+        width: 100%;
+    }
+    
+    .shop-cart .book {
+        width: 450px;
+       flex-wrap: wrap;
+        gap:2em
+    }
+    
+    
+    
+    .shop-cart .book .description{
+        gap:1em;
+        flex-grow: 1;
+        width: 400px;
+    }
 }
