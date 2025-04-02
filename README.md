@@ -28,22 +28,22 @@ The BookStore project is a Single Page Application built using React.
 
 ## Application structure: 
 1. Public part of the application: 
- - It is visible without authentication.
- - It contains: 
-   1. Home page - latest added three books
-   2. Catalog page - all books or divided in different categories.
-   3. Login Page
-   4. Register Page
-   5. Book Details Page - basic book details.
-   6. Contact Page
+ It is visible without authentication.
+ It contains: 
+  - Home page - latest added three books
+  - Catalog page - all books or divided in different categories.
+  - Login Page
+  - Register Page
+  - Book Details Page - basic book details.
+  - Contact Page
 
 2. Private part of the application: 
 After successful login/register, the user can access additional routes and functionality :
-  1. Profile page
-  2. Shop cart - Add/remove books and Finalize a purchase.
-  3. Wishlist - Add/remove books
-  4. Create, edit and delete records. 
-  5. Add comments to books.  
+  - Profile page
+  - Shop cart - Add/remove books and Finalize a purchase.
+  - Wishlist - Add/remove books
+  - Create, edit and delete records. 
+  - Add comments to books.  
 
 ## Base URL Routes
 1. Public access:
