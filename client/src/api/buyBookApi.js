@@ -9,10 +9,7 @@ export const useFetchShopCart = (userId) => {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        if (!userId) {
-            setLoading(true);
-            return
-        }
+        
         setLoading(true)
         const searchParams = new URLSearchParams({
             where: `_ownerId="${userId}"`
