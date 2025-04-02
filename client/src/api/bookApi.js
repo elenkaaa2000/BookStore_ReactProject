@@ -39,14 +39,14 @@ export const useFetchData = (category) => {
 
 export const useFetchSearchData = () => {
     const [searchResult, setSearchResult] = useState([]);
-    const [loading,setLoading] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     const searchBook = async (search) => {
         if (search === "") {
             setSearchResult([]);
             return
         };
-setLoading(true)
+        setLoading(true)
         const searchParams = new URLSearchParams({
             where: `title LIKE "${search}"`
         });
@@ -101,29 +101,20 @@ export const useFetchBookDetails = (bookId) => {
     useEffect(() => {
         setLoading(true)
         requester.get(`${baseUrl}/${bookId}`)
-            .then(result=>{
+            .then(result => {
                 setBook(result);
                 setLoading(false)
             });
     }, [bookId])
 
-    return { book,loading }
+    return { book, loading }
 };
 
 
 export const useUpdateBook = () => {
     const { options } = useAuth()
     const updateBook = async (bookId, data) => {
-        try {
-            const response = await requester.put(`${baseUrl}/${bookId}`, { ...data, _id: bookId }, options);
-        } catch (error) {
-            if (error.message == 'Forbidden') {
-                throw new Error('Нямате права да редактирате тази книга');
-            }
-            throw new Error('Неуспешно редактиране на книга!')
-
-        }
-
+        await requester.put(`${baseUrl}/${bookId}`, { ...data, _id: bookId }, options);
     }
     return {
         updateBook
