@@ -152,12 +152,8 @@ export default function BookCreate() {
 
                 <div className="field">
                     <label htmlFor="translator">Преводач</label>
-                    <input type="text" name="translator" id="translator"
-                        {...register('translator', {
-                            required: "Полето е задължително",
-                        })}
-                    />
-                    {errors.translator && <p className='validationError'>{errors.translator.message}</p>}
+                    <input type="text" name="translator" id="translator"/>
+                   
                 </div>
 
                 <div className="field">
