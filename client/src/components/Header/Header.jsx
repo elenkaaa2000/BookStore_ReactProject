@@ -1,15 +1,17 @@
-import { useState } from 'react'
-import { Link, NavLink } from 'react-router'
+import { useRef, useState, useEffect } from 'react'
+import { Link, NavLink, useLocation } from 'react-router'
 import useAuth from '../../hooks/useAuth'
 import { useFetchSearchData } from '../../api/bookApi';
 import { toast } from 'react-toastify'
-import Loader from '../Loader/Loader';
+
 
 export default function Header() {
     const { isAuthenticated } = useAuth();
-    const { searchBook, searchResult, loading } = useFetchSearchData();
+    const { searchBook, searchResult } = useFetchSearchData();
     const [isSearched, setIsSearched] = useState(false);
 
+    const searchRef = useRef(null);
+    const location = useLocation();
 
     const searchAction = async (formData) => {
         const data = Object.fromEntries(formData);
@@ -26,6 +28,26 @@ export default function Header() {
     const closeSearch = () => {
         setIsSearched(false)
     }
+    const handleSearchResultClick = (event) => {
+        event.stopPropagation(); // Prevents the click from triggering outside click logic
+    };
+
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (searchRef.current && !searchRef.current.contains(event.target)) {
+                closeSearch();
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
+
+   
+
+    // Close search field when route changes
+    useEffect(() => {
+        closeSearch();
+    }, [location.pathname]);
 
 
     return (
@@ -41,9 +63,9 @@ export default function Header() {
                             <button><i className="fa-solid fa-magnifying-glass"></i></button>
                         </form>
                         {!isSearched ? null :
-                            (<div className="search-result">                              
-                                    {searchResult.length > 0 ? (<ul>
-                                    {searchResult.map(b => (<li key={b._id}><Link to={`/book/${b._id}/details`}>{`${b.title}`}</Link></li>))}
+                            (<div className="search-result">
+                                {searchResult.length > 0 ? (<ul>
+                                    {searchResult.map(b => (<li key={b._id}><Link to={`/book/${b._id}/details`} onClick={()=>handleSearchResultClick(b._id)}>{`${b.title}`}</Link></li>))}
                                 </ul>) : (<p>Няма съвпадение с търсенето</p>)}
                                 <button onClick={closeSearch}><i className="close fa-solid fa-xmark"></i></button>
                             </div>)
