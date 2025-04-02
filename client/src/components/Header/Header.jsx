@@ -29,7 +29,7 @@ export default function Header() {
         setIsSearched(false)
     }
     const handleSearchResultClick = (event) => {
-        event.stopPropagation(); // Prevents the click from triggering outside click logic
+        event.stopPropagation(); 
     };
 
     useEffect(() => {
@@ -40,11 +40,9 @@ export default function Header() {
         }
         document.addEventListener("mousedown", handleClickOutside);
         return () => document.removeEventListener("mousedown", handleClickOutside);
-    }, []);
+    }, []);   
 
-   
-
-    // Close search field when route changes
+    
     useEffect(() => {
         closeSearch();
     }, [location.pathname]);
